@@ -181,6 +181,16 @@
 
   .tap-fade { @apply transition-all duration-150 active:scale-[0.98] active:opacity-80; }
 
+  .site-shell .grid > * {
+    min-width: 0;
+  }
+
+  .site-shell h1,
+  .site-shell h2,
+  .site-shell h3 {
+    overflow-wrap: break-word;
+  }
+
   /* ===== Editorial luxe (Sora + Manrope, как в приложении) ===== */
 
   .lux-paper {

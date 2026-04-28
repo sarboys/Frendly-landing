@@ -77,7 +77,7 @@ const eo = (t: number) => 1 - Math.pow(1 - clamp01(t), 3);
 /* ---------- Phone Shell ---------- */
 
 const PhoneShell = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
-  <div className="w-[300px] h-[610px] rounded-[46px] bg-foreground p-3 phone-shadow-lux mx-auto">
+  <div className="w-[min(300px,calc(100vw-48px))] aspect-[300/610] rounded-[46px] bg-foreground p-3 phone-shadow-lux mx-auto">
     <div
       className={`relative w-full h-full rounded-[36px] overflow-hidden lux-frame ${
         dark ? "bg-[hsl(var(--ad-bg))]" : "bg-paper"
@@ -1931,22 +1931,22 @@ export const AnimatedDemo = () => {
   return (
     <section id="demo" className="relative bg-paper-deep/60 border-y border-hairline overflow-hidden">
       <div className="absolute inset-0 -z-10 lux-paper opacity-60" />
-      <div className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         {/* Editorial section header */}
-        <div className="grid md:grid-cols-12 gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           <div className="md:col-span-4">
             <p className="lux-eyebrow">Live · Demonstration</p>
             <div className="mt-3 w-12 lux-rule" />
           </div>
           <div className="md:col-span-8">
-            <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+            <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
               Посмотри, как это <em className="lux-h1-italic text-primary">работает</em> —
               прямо в кадре.
             </h2>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_auto] gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-center">
           {/* LEFT — controls */}
           <div>
             <p className="text-[16px] text-ink-soft max-w-md leading-[1.65] font-light">

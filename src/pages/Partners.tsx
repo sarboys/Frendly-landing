@@ -139,18 +139,18 @@ const faq = [
 
 const Partners = () => {
   return (
-    <main className="min-h-screen bg-paper text-foreground overflow-x-hidden font-sans-lux relative">
+    <main className="site-shell min-h-screen bg-paper text-foreground overflow-x-hidden font-sans-lux relative">
       <div className="fixed inset-0 pointer-events-none -z-10 lux-paper" />
 
       {/* NAV */}
       <nav className="sticky top-0 z-40 backdrop-blur-xl bg-paper/80 border-b border-hairline/60">
-        <div className="max-w-[1240px] mx-auto px-8 h-[68px] flex items-center justify-between">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
             <img src={iconV5} alt="Frendly" className="w-8 h-8 rounded-[28%] transition-transform group-hover:rotate-3" />
             <span className="font-serif text-[20px] tracking-tight">Frendly</span>
             <span className="hidden md:inline-block ml-3 lux-eyebrow text-[9px]">Partners · Vol. I</span>
           </Link>
-          <div className="hidden md:flex items-center gap-8 text-[13px] text-ink-soft tracking-wide">
+          <div className="hidden lg:flex items-center gap-8 text-[13px] text-ink-soft tracking-wide">
             <a href="#why" className="lux-link hover:text-foreground transition-colors">Возможности</a>
             <a href="#how" className="lux-link hover:text-foreground transition-colors">Метод</a>
             <a href="#cases" className="lux-link hover:text-foreground transition-colors">Кейсы</a>
@@ -160,7 +160,7 @@ const Partners = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/"
-              className="hidden sm:inline-flex items-center text-[12px] tracking-[0.18em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
+              className="hidden lg:inline-flex items-center text-[12px] tracking-[0.18em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
             >
               Для пользователей
             </Link>
@@ -181,7 +181,7 @@ const Partners = () => {
           <div className="absolute top-32 -right-40 w-[560px] h-[560px] rounded-full bg-primary/[0.08] blur-3xl" />
         </div>
 
-        <div className="max-w-[1240px] mx-auto px-8 pt-10 md:pt-14">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-10 md:pt-14">
           <div className="flex items-center justify-between gap-4 pb-5">
             <span className="lux-eyebrow">N° 02 · Frendly for Business</span>
             <div className="hidden sm:flex items-center gap-3 lux-eyebrow text-[10px]">
@@ -193,14 +193,14 @@ const Partners = () => {
           <div className="lux-rule" />
         </div>
 
-        <div className="max-w-[1240px] mx-auto px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-12 gap-10 items-center">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 animate-fade-in">
             <div className="inline-flex items-center gap-2 lux-eyebrow mb-7">
               <Handshake className="w-3.5 h-3.5 text-secondary" />
               Партнёрская программа
             </div>
 
-            <h1 className="lux-h1 text-[60px] sm:text-[84px] md:text-[112px] tracking-[-0.04em]">
+            <h1 className="lux-h1 text-[48px] min-[390px]:text-[56px] sm:text-[84px] md:text-[112px] tracking-[-0.04em]">
               Город,
               <br /> который
               <br /> приходит <span className="lux-h1-italic text-secondary">сам</span>.
@@ -302,7 +302,7 @@ const Partners = () => {
               </div>
 
               <div
-                className="absolute -left-10 -bottom-5 bg-foreground text-background rounded-2xl px-4 py-2.5 shadow-paper flex items-center gap-2 max-w-[240px] animate-fade-in"
+                className="absolute left-2 xl:-left-10 -bottom-5 bg-foreground text-background rounded-2xl px-4 py-2.5 shadow-paper flex items-center gap-2 max-w-[240px] animate-fade-in"
                 style={{ animationDelay: "600ms", animationFillMode: "backwards" }}
               >
                 <div className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
@@ -315,7 +315,7 @@ const Partners = () => {
               </div>
 
               <div
-                className="absolute -right-6 -top-5 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
+                className="absolute right-2 xl:-right-6 -top-5 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
                 style={{ animationDelay: "800ms", animationFillMode: "backwards" }}
               >
                 <Zap className="w-3.5 h-3.5 text-primary" /> Live · 4 стола
@@ -327,7 +327,7 @@ const Partners = () => {
 
       {/* STATS — editorial scoreboard */}
       <section className="border-y border-hairline">
-        <div className="max-w-[1240px] mx-auto px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
           {[
             { v: <Counter to={240} />, suf: "+", l: "заведений-партнёров" },
             { v: <Counter to={1800} />, suf: "+", l: "вечеров в месяц" },
@@ -347,15 +347,15 @@ const Partners = () => {
       </section>
 
       {/* WHY / OPPORTUNITIES — editorial chapters */}
-      <section id="why" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="why" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава I · Возможности</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Что ты получаешь, став <em className="lux-h1-italic text-secondary">партнёром</em>.
               </h2>
             </div>
@@ -365,7 +365,7 @@ const Partners = () => {
         <div className="border-t border-hairline">
           {opportunities.map((f, i) => (
             <Reveal key={f.title} delay={i * 60}>
-              <div className="group grid md:grid-cols-12 gap-6 items-start py-10 border-b border-hairline hover:bg-paper-deep/40 transition-colors px-2 -mx-2">
+              <div className="group grid grid-cols-1 md:grid-cols-12 gap-6 items-start py-10 border-b border-hairline hover:bg-paper-deep/40 transition-colors px-2 -mx-2">
                 <div className="md:col-span-1 lux-num text-[28px] text-ink-mute leading-none">
                   {String(i + 1).padStart(2, "0")}
                 </div>
@@ -392,15 +392,15 @@ const Partners = () => {
       {/* HOW — editorial method */}
       <section id="how" className="relative bg-paper-deep/60 border-y border-hairline overflow-hidden">
         <div className="absolute inset-0 -z-10 lux-paper opacity-60" />
-        <div className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
           <Reveal>
-            <div className="grid md:grid-cols-12 gap-10 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20">
               <div className="md:col-span-4">
                 <p className="lux-eyebrow">Глава II · Метод</p>
                 <div className="mt-3 w-12 lux-rule" />
               </div>
               <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   От заявки
                   <br /> до первых <em className="lux-h1-italic text-secondary">гостей</em> —
                   за неделю.
@@ -409,7 +409,7 @@ const Partners = () => {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
             {flow.map((s, i) => (
               <Reveal key={s.n} delay={i * 100}>
                 <div className="group relative bg-paper p-8 h-full hover:bg-paper-deep/60 transition-colors">
@@ -427,15 +427,15 @@ const Partners = () => {
       </section>
 
       {/* CASES — gazette */}
-      <section id="cases" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="cases" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава III · Кейсы</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Они уже <em className="lux-h1-italic text-secondary">растут</em>
                 <br /> с Frendly.
               </h2>
@@ -443,7 +443,7 @@ const Partners = () => {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
           {cases.map((c, i) => (
             <Reveal key={c.name} delay={i * 100}>
               <div className="group bg-paper h-full flex flex-col">
@@ -481,9 +481,9 @@ const Partners = () => {
       {/* TYPES — editorial directory */}
       <section className="bg-paper-deep/60 border-y border-hairline relative">
         <div className="absolute inset-0 lux-paper opacity-50 pointer-events-none" />
-        <div className="max-w-[1240px] mx-auto px-8 py-24 relative">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-24 relative">
           <Reveal>
-            <div className="grid md:grid-cols-12 gap-10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
               <div className="md:col-span-4">
                 <p className="lux-eyebrow">Глава IV · Кому подходит</p>
                 <div className="mt-3 w-12 lux-rule" />
@@ -524,15 +524,15 @@ const Partners = () => {
       </section>
 
       {/* PRICING — editorial price card */}
-      <section id="pricing" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="pricing" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава V · Тарифы</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Старт <em className="lux-h1-italic text-secondary">бесплатный</em>.
                 <br /> Платишь, когда видишь поток.
               </h2>
@@ -540,7 +540,7 @@ const Partners = () => {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[28px] overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[28px] overflow-hidden">
           {tariffs.map((t) => (
             <Reveal key={t.name}>
               <div
@@ -601,15 +601,15 @@ const Partners = () => {
       {/* FAQ */}
       <section id="faq" className="bg-paper-deep/60 border-y border-hairline relative">
         <div className="absolute inset-0 lux-paper opacity-50 pointer-events-none" />
-        <div className="max-w-[1240px] mx-auto px-8 py-28 md:py-36 relative">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36 relative">
           <Reveal>
-            <div className="grid md:grid-cols-12 gap-10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
               <div className="md:col-span-4">
                 <p className="lux-eyebrow">Глава VI · FAQ</p>
                 <div className="mt-3 w-12 lux-rule" />
               </div>
               <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   Частые <em className="lux-h1-italic text-secondary">вопросы</em>
                   <br /> партнёров.
                 </h2>
@@ -645,17 +645,17 @@ const Partners = () => {
       </section>
 
       {/* APPLY */}
-      <section id="apply" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="apply" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
           <div className="relative overflow-hidden rounded-[36px] border border-hairline bg-paper-deep">
             <div className="absolute inset-0 lux-paper opacity-70" />
             <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-secondary/20 blur-3xl" />
             <div className="absolute -bottom-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/20 blur-3xl" />
 
-            <div className="relative px-8 md:px-14 py-16 md:py-20 grid md:grid-cols-12 gap-12 items-start">
+            <div className="relative px-5 sm:px-8 md:px-14 py-16 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
               <div className="md:col-span-6">
                 <p className="lux-eyebrow mb-6">Cover · Apply now</p>
-                <h2 className="lux-h1 text-[44px] md:text-[72px] tracking-[-0.04em]">
+                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[72px] tracking-[-0.04em]">
                   Подключись
                   <br /> за пару <em className="lux-h1-italic text-secondary">минут</em>.
                 </h2>
@@ -694,7 +694,7 @@ const Partners = () => {
                     placeholder="Bar Strelka"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="lux-eyebrow text-[9px]">Город</label>
                     <input
@@ -748,8 +748,8 @@ const Partners = () => {
 
       {/* FOOTER */}
       <footer className="border-t border-hairline">
-        <div className="max-w-[1240px] mx-auto px-8 pt-20 pb-10">
-          <div className="grid md:grid-cols-12 gap-10 pb-16 border-b border-hairline">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-20 pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-hairline">
             <div className="md:col-span-5">
               <div className="flex items-center gap-3 mb-5">
                 <img src={iconV5} alt="Frendly" className="w-9 h-9 rounded-[28%]" />
@@ -783,7 +783,7 @@ const Partners = () => {
 
           <div className="pt-8 flex flex-wrap justify-between items-center gap-3 text-[11px] text-ink-mute tracking-wide">
             <p>© MMXXVI Frendly. Все права защищены.</p>
-            <div className="flex gap-7">
+            <div className="flex flex-wrap gap-x-7 gap-y-3">
               <a href="#" className="lux-link hover:text-foreground">Условия партнёрства</a>
               <a href="#" className="lux-link hover:text-foreground">Приватность</a>
               <a href="mailto:partners@frendly.app" className="lux-link hover:text-foreground">partners@frendly.app</a>

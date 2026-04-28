@@ -187,15 +187,15 @@ const FeaturesShowcase = () => {
   const tonePrimary = f.tone === "primary";
 
   return (
-    <section id="features" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+    <section id="features" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
       <Reveal>
-        <div className="grid md:grid-cols-12 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
           <div className="md:col-span-4">
             <p className="lux-eyebrow">Глава I · Возможности</p>
             <div className="mt-3 w-12 lux-rule" />
           </div>
           <div className="md:col-span-8">
-            <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+            <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
               Всё, чтобы вечер <em className="lux-h1-italic text-primary">случился</em> —
               без неловкости.
             </h2>
@@ -207,7 +207,7 @@ const FeaturesShowcase = () => {
         </div>
       </Reveal>
 
-      <div className="grid md:grid-cols-12 gap-8 lg:gap-14 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 items-stretch">
         {/* LEFT: list */}
         <div className="md:col-span-7 border-t border-hairline">
           {features.map((feat, i) => {
@@ -329,19 +329,19 @@ const FeaturesShowcase = () => {
 
 const Landing = () => {
   return (
-    <main className="min-h-screen bg-paper text-foreground overflow-x-hidden font-sans-lux relative">
+    <main className="site-shell min-h-screen bg-paper text-foreground overflow-x-hidden font-sans-lux relative">
       {/* Paper texture base */}
       <div className="fixed inset-0 pointer-events-none -z-10 lux-paper" />
 
       {/* NAV — editorial */}
       <nav className="sticky top-0 z-40 backdrop-blur-xl bg-paper/80 border-b border-hairline/60">
-        <div className="max-w-[1240px] mx-auto px-8 h-[68px] flex items-center justify-between">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
             <img src={iconV5} alt="Frendly" className="w-8 h-8 rounded-[28%] transition-transform group-hover:rotate-3" />
             <span className="font-serif text-[20px] tracking-tight">Frendly</span>
             <span className="hidden md:inline-block ml-3 lux-eyebrow text-[9px]">Est. MMXXVI</span>
           </Link>
-          <div className="hidden md:flex items-center gap-8 text-[13px] text-ink-soft tracking-wide">
+          <div className="hidden lg:flex items-center gap-8 text-[13px] text-ink-soft tracking-wide">
             <a href="#features" className="lux-link hover:text-foreground transition-colors">Возможности</a>
             <a href="#how" className="lux-link hover:text-foreground transition-colors">Метод</a>
             <a href="#demo" className="lux-link hover:text-foreground transition-colors">Демо</a>
@@ -352,7 +352,7 @@ const Landing = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/"
-              className="hidden sm:inline-flex items-center text-[12px] tracking-[0.18em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
+              className="hidden lg:inline-flex items-center text-[12px] tracking-[0.18em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
             >
               Прототип
             </Link>
@@ -374,7 +374,7 @@ const Landing = () => {
           <div className="absolute top-32 -right-40 w-[560px] h-[560px] rounded-full bg-secondary/[0.10] blur-3xl" />
         </div>
 
-        <div className="max-w-[1240px] mx-auto px-8 pt-10 md:pt-14">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-10 md:pt-14">
           {/* Issue line */}
           <div className="flex items-center justify-between gap-4 pb-5">
             <div className="flex items-center gap-3">
@@ -389,14 +389,14 @@ const Landing = () => {
           <div className="lux-rule" />
         </div>
 
-        <div className="max-w-[1240px] mx-auto px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-12 gap-10 items-center">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 animate-fade-in">
             <div className="inline-flex items-center gap-2 lux-eyebrow mb-7">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               Уже в Москве и Петербурге
             </div>
 
-            <h1 className="lux-h1 text-[60px] sm:text-[84px] md:text-[112px] tracking-[-0.04em]">
+            <h1 className="lux-h1 text-[48px] min-[390px]:text-[56px] sm:text-[84px] md:text-[112px] tracking-[-0.04em]">
               Знакомства
               <br />
               через <span className="lux-h1-italic text-primary">вечера</span>,
@@ -502,19 +502,19 @@ const Landing = () => {
 
               {/* Floating editorial chips */}
               <div
-                className="absolute -left-12 top-24 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
+                className="absolute left-2 xl:-left-12 top-24 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
                 style={{ animationDelay: "700ms", animationFillMode: "backwards" }}
               >
                 <Wine className="w-3.5 h-3.5 text-primary" /> Вино рядом
               </div>
               <div
-                className="absolute -right-10 top-48 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
+                className="absolute right-2 xl:-right-10 top-48 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
                 style={{ animationDelay: "900ms", animationFillMode: "backwards" }}
               >
                 <Music className="w-3.5 h-3.5 text-secondary" /> +3 френда
               </div>
               <div
-                className="absolute -left-8 bottom-28 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
+                className="absolute left-2 xl:-left-8 bottom-28 bg-paper border border-hairline rounded-full px-3.5 py-2 shadow-paper flex items-center gap-2 text-[11px] font-medium animate-fade-in tracking-wide"
                 style={{ animationDelay: "1100ms", animationFillMode: "backwards" }}
               >
                 <Coffee className="w-3.5 h-3.5 text-primary" /> Кофе утром
@@ -546,7 +546,7 @@ const Landing = () => {
 
       {/* STATS — editorial scoreboard */}
       <section className="border-b border-hairline">
-        <div className="max-w-[1240px] mx-auto px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
           {[
             { k: "12 400", suf: "+", v: "активных френдов" },
             { k: "1 800", suf: "+", v: "вечеров в месяц" },
@@ -571,15 +571,15 @@ const Landing = () => {
       {/* HOW IT WORKS — editorial method */}
       <section id="how" className="relative bg-paper-deep/60 border-y border-hairline overflow-hidden">
         <div className="absolute inset-0 -z-10 lux-paper opacity-60" />
-        <div className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
           <Reveal>
-            <div className="grid md:grid-cols-12 gap-10 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20">
               <div className="md:col-span-4">
                 <p className="lux-eyebrow">Глава II · Метод</p>
                 <div className="mt-3 w-12 lux-rule" />
               </div>
               <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   От «скучно»
                   <br /> до <em className="lux-h1-italic text-primary">«выходим»</em> —
                   четыре шага.
@@ -588,7 +588,7 @@ const Landing = () => {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
             {flow.map((step, i) => (
               <Reveal key={step.n} delay={i * 100}>
                 <div className="group relative bg-paper p-8 h-full hover:bg-paper-deep/60 transition-colors">
@@ -609,15 +609,15 @@ const Landing = () => {
       <AnimatedDemo />
 
       {/* EVENTS GALLERY — editorial gazette */}
-      <section id="events" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="events" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-16 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-end">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава III · Вечера</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-6">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 То, что <em className="lux-h1-italic text-primary">случается</em>
                 <br /> сегодня вечером.
               </h2>
@@ -690,7 +690,7 @@ const Landing = () => {
           mixBlendMode: "overlay",
         }} />
 
-        <div className="relative max-w-[1240px] mx-auto px-8 py-28 md:py-36 text-[hsl(var(--ad-fg))] grid md:grid-cols-12 gap-10 items-center">
+        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36 text-[hsl(var(--ad-fg))] grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7">
             <Reveal>
               <p className="lux-eyebrow text-[10px] text-[hsl(var(--ad-fg-mute))] mb-5 flex items-center gap-3">
@@ -761,15 +761,15 @@ const Landing = () => {
       </section>
 
       {/* TESTIMONIALS — editorial pull-quotes */}
-      <section className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава V · Голоса</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Тёплые отзывы —
                 <br /> как тёплые <em className="lux-h1-italic text-primary">вечера</em>.
               </h2>
@@ -777,7 +777,7 @@ const Landing = () => {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline border border-hairline rounded-[24px] overflow-hidden">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 120}>
               <div className="h-full bg-paper p-8 md:p-10 flex flex-col">
@@ -805,15 +805,15 @@ const Landing = () => {
       {/* PRICING — editorial price card */}
       <section className="bg-paper-deep/60 border-y border-hairline relative">
         <div className="absolute inset-0 lux-paper opacity-50 pointer-events-none" />
-        <div className="max-w-[1240px] mx-auto px-8 py-28 md:py-36 relative">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36 relative">
           <Reveal>
-            <div className="grid md:grid-cols-12 gap-10 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
               <div className="md:col-span-4">
                 <p className="lux-eyebrow">Глава VI · Цены</p>
                 <div className="mt-3 w-12 lux-rule" />
               </div>
               <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   Старт <em className="lux-h1-italic text-primary">бесплатный</em>.
                   <br /> Frendly+ — когда захочется большего.
                 </h2>
@@ -821,7 +821,7 @@ const Landing = () => {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-px bg-hairline border border-hairline rounded-[28px] overflow-hidden max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-hairline border border-hairline rounded-[28px] overflow-hidden max-w-4xl mx-auto">
             <Reveal>
               <div className="bg-paper p-10 h-full flex flex-col">
                 <p className="lux-eyebrow">Free</p>
@@ -874,15 +874,15 @@ const Landing = () => {
       </section>
 
       {/* FAQ — editorial Q&A */}
-      <section id="faq" className="max-w-[1240px] mx-auto px-8 py-28 md:py-36">
+      <section id="faq" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid md:grid-cols-12 gap-10 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
             <div className="md:col-span-4">
               <p className="lux-eyebrow">Глава VII · FAQ</p>
               <div className="mt-3 w-12 lux-rule" />
             </div>
             <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[44px] md:text-[68px] tracking-[-0.035em]">
+              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Частые <em className="lux-h1-italic text-primary">вопросы</em>.
               </h2>
             </div>
@@ -916,17 +916,17 @@ const Landing = () => {
       </section>
 
       {/* CTA — editorial cover */}
-      <section id="cta" className="max-w-[1240px] mx-auto px-8 pb-28 md:pb-36">
+      <section id="cta" className="max-w-[1240px] mx-auto px-5 sm:px-8 pb-28 md:pb-36">
         <Reveal>
           <div className="relative overflow-hidden rounded-[36px] border border-hairline bg-paper-deep">
             <div className="absolute inset-0 lux-paper opacity-70" />
             <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-primary/20 blur-3xl" />
             <div className="absolute -bottom-32 -left-32 w-[520px] h-[520px] rounded-full bg-secondary/20 blur-3xl" />
 
-            <div className="relative px-8 md:px-16 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-end">
+            <div className="relative px-5 sm:px-8 md:px-16 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 items-end">
               <div className="md:col-span-7">
                 <p className="lux-eyebrow mb-6">Issue No. 01 · Cover</p>
-                <h2 className="lux-h1 text-[48px] md:text-[88px] tracking-[-0.04em]">
+                <h2 className="lux-h1 text-[40px] min-[390px]:text-[48px] md:text-[88px] tracking-[-0.04em]">
                   Сегодня вечером —
                   <br /> кто-то уже собирает
                   <br /> вечер для <em className="lux-h1-italic text-primary">тебя</em>.
@@ -958,8 +958,8 @@ const Landing = () => {
 
       {/* FOOTER — editorial colophon */}
       <footer className="border-t border-hairline">
-        <div className="max-w-[1240px] mx-auto px-8 pt-20 pb-10">
-          <div className="grid md:grid-cols-12 gap-10 pb-16 border-b border-hairline">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-20 pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-hairline">
             <div className="md:col-span-5">
               <div className="flex items-center gap-3 mb-5">
                 <img src={iconV5} alt="Frendly" className="w-9 h-9 rounded-[28%]" />
@@ -995,13 +995,13 @@ const Landing = () => {
               <p className="text-[13px] text-ink-soft font-light leading-relaxed mb-4">
                 Раз в неделю — лучшие вечера твоего города и редакторские подборки.
               </p>
-              <form className="flex border-b border-foreground/40 pb-1" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-wrap gap-2 border-b border-foreground/40 pb-1" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="ты@example.com"
-                  className="flex-1 bg-transparent text-[13px] outline-none placeholder:text-ink-mute/60 py-1"
+                  className="min-w-0 flex-[1_1_150px] bg-transparent text-[13px] outline-none placeholder:text-ink-mute/60 py-1"
                 />
-                <button className="ml-2 lux-link text-[12px] uppercase tracking-[0.16em] font-semibold">
+                <button className="lux-link text-[12px] uppercase tracking-[0.16em] font-semibold">
                   Подписаться
                 </button>
               </form>
@@ -1010,7 +1010,7 @@ const Landing = () => {
 
           <div className="pt-8 flex flex-wrap justify-between items-center gap-3 text-[11px] text-ink-mute tracking-wide">
             <p>© MMXXVI Frendly. Все права защищены.</p>
-            <div className="flex gap-7">
+            <div className="flex flex-wrap gap-x-7 gap-y-3">
               <a href="#" className="lux-link hover:text-foreground">Условия</a>
               <a href="#" className="lux-link hover:text-foreground">Приватность</a>
               <a href="#" className="lux-link hover:text-foreground">Поддержка</a>
