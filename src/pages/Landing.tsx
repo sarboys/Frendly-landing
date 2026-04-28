@@ -14,7 +14,6 @@ import {
   Compass,
   Star,
   Check,
-  PlayCircle,
   Apple,
   Smartphone,
 } from "lucide-react";
@@ -189,17 +188,17 @@ const FeaturesShowcase = () => {
   return (
     <section id="features" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
       <Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
-          <div className="md:col-span-4">
+        <div className="max-w-4xl mx-auto text-center mb-14">
+          <div>
             <p className="lux-eyebrow">Глава I · Возможности</p>
-            <div className="mt-3 w-12 lux-rule" />
+            <div className="mt-3 w-12 lux-rule mx-auto" />
           </div>
-          <div className="md:col-span-8">
-            <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+          <div className="mt-8">
+            <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
               Всё, чтобы вечер <em className="lux-h1-italic text-primary">случился</em> —
               без неловкости.
             </h2>
-            <p className="mt-6 text-[15px] text-ink-soft max-w-[520px] leading-[1.7]">
+            <p className="mt-6 text-[15px] text-ink-soft max-w-[520px] mx-auto leading-[1.7]">
               Шесть вещей, которые превращают «надо бы выбраться» в реальный план.
               Кликай — увидишь, как это выглядит в приложении.
             </p>
@@ -346,22 +345,15 @@ const Landing = () => {
             <a href="#how" className="lux-link hover:text-foreground transition-colors">Метод</a>
             <a href="#demo" className="lux-link hover:text-foreground transition-colors">Демо</a>
             <a href="#events" className="lux-link hover:text-foreground transition-colors">Вечера</a>
-            <Link to="/partners" className="lux-link hover:text-foreground transition-colors">Партнёрам</Link>
             <a href="#faq" className="lux-link hover:text-foreground transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-3">
             <Link
-              to="/"
-              className="hidden lg:inline-flex items-center text-[12px] tracking-[0.18em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
-            >
-              Прототип
-            </Link>
-            <a
-              href="#cta"
+              to="/partners"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-[12px] font-semibold tracking-[0.14em] uppercase tap-fade hover:bg-ink-deep transition-colors"
             >
-              Скачать <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+              Для партнёров <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </nav>
@@ -427,12 +419,6 @@ const Landing = () => {
               >
                 <Smartphone className="w-4 h-4" /> Google Play
               </a>
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 h-12 px-3 text-foreground text-[13px] tracking-wide lux-link"
-              >
-                <PlayCircle className="w-4 h-4 text-primary" /> Открыть прототип
-              </Link>
             </div>
 
             <div className="mt-12 flex items-center gap-5 text-[13px] text-ink-mute">
@@ -576,13 +562,13 @@ const Landing = () => {
         <div className="absolute inset-0 -z-10 lux-paper opacity-60" />
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
           <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20">
-              <div className="md:col-span-4">
+            <div className="max-w-4xl mx-auto text-center mb-20">
+              <div>
                 <p className="lux-eyebrow">Глава II · Метод</p>
-                <div className="mt-3 w-12 lux-rule" />
+                <div className="mt-3 w-12 lux-rule mx-auto" />
               </div>
-              <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+              <div className="mt-8">
+                <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   От «скучно»
                   <br /> до <em className="lux-h1-italic text-primary">«выходим»</em> —
                   четыре шага.
@@ -611,24 +597,16 @@ const Landing = () => {
       {/* EVENTS GALLERY — editorial gazette */}
       <section id="events" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-end">
-            <div className="md:col-span-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <div>
               <p className="lux-eyebrow">Глава III · Вечера</p>
-              <div className="mt-3 w-12 lux-rule" />
+              <div className="mt-3 w-12 lux-rule mx-auto" />
             </div>
-            <div className="md:col-span-6">
-              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+            <div className="mt-8">
+              <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 То, что <em className="lux-h1-italic text-primary">случается</em>
                 <br /> сегодня вечером.
               </h2>
-            </div>
-            <div className="md:col-span-2 md:text-right">
-              <Link
-                to="/"
-                className="inline-flex items-center gap-1.5 text-[12px] font-semibold tracking-[0.18em] uppercase text-foreground lux-link"
-              >
-                Прототип <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
             </div>
           </div>
         </Reveal>
@@ -691,13 +669,13 @@ const Landing = () => {
         }} />
 
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36 text-[hsl(var(--ad-fg))] grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-          <div className="md:col-span-7">
+          <div className="md:col-span-7 text-center">
             <Reveal>
-              <p className="lux-eyebrow text-[10px] text-[hsl(var(--ad-fg-mute))] mb-5 flex items-center gap-3">
+              <p className="lux-eyebrow text-[10px] text-[hsl(var(--ad-fg-mute))] mb-5 flex items-center justify-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--ad-magenta))] animate-pulse" />
                 Глава IV · After Dark · 18+
               </p>
-              <h2 className="lux-h1 text-[52px] md:text-[88px] tracking-[-0.04em]">
+              <h2 className="lux-h1 text-center text-[52px] md:text-[88px] tracking-[-0.04em]">
                 Когда город
                 <br />
                 <em className="lux-h1-italic" style={{
@@ -706,14 +684,14 @@ const Landing = () => {
                   WebkitTextFillColor: "transparent",
                 }}>просыпается</em> ночью.
               </h2>
-              <div className="mt-8 flex items-start gap-5 max-w-xl">
-                <div className="w-10 h-px bg-[hsl(var(--ad-fg-mute))] mt-3 shrink-0" />
+              <div className="mt-8 flex items-start gap-5 max-w-xl mx-auto">
+                <div className="hidden sm:block w-10 h-px bg-[hsl(var(--ad-fg-mute))] mt-3 shrink-0" />
                 <p className="text-[16px] text-[hsl(var(--ad-fg-soft))] leading-[1.65] font-light">
                   Закрытый режим: kink-friendly события, swing-вечера, приватные клубы и ночные афтепати.
                   Только верифицированные френды, NDA, кодекс согласия.
                 </p>
               </div>
-              <div className="mt-10 flex flex-wrap items-center gap-3">
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="#cta"
                   className="inline-flex items-center gap-2 h-12 px-6 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase text-white transition-transform hover:-translate-y-0.5"
@@ -763,13 +741,13 @@ const Landing = () => {
       {/* TESTIMONIALS — editorial pull-quotes */}
       <section className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
-            <div className="md:col-span-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <div>
               <p className="lux-eyebrow">Глава V · Голоса</p>
-              <div className="mt-3 w-12 lux-rule" />
+              <div className="mt-3 w-12 lux-rule mx-auto" />
             </div>
-            <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+            <div className="mt-8">
+              <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Тёплые отзывы —
                 <br /> как тёплые <em className="lux-h1-italic text-primary">вечера</em>.
               </h2>
@@ -807,13 +785,13 @@ const Landing = () => {
         <div className="absolute inset-0 lux-paper opacity-50 pointer-events-none" />
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36 relative">
           <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
-              <div className="md:col-span-4">
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <div>
                 <p className="lux-eyebrow">Глава VI · Цены</p>
-                <div className="mt-3 w-12 lux-rule" />
+                <div className="mt-3 w-12 lux-rule mx-auto" />
               </div>
-              <div className="md:col-span-8">
-                <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+              <div className="mt-8">
+                <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                   Старт <em className="lux-h1-italic text-primary">бесплатный</em>.
                   <br /> Frendly+ — когда захочется большего.
                 </h2>
@@ -876,20 +854,20 @@ const Landing = () => {
       {/* FAQ — editorial Q&A */}
       <section id="faq" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
-            <div className="md:col-span-4">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <div>
               <p className="lux-eyebrow">Глава VII · FAQ</p>
-              <div className="mt-3 w-12 lux-rule" />
+              <div className="mt-3 w-12 lux-rule mx-auto" />
             </div>
-            <div className="md:col-span-8">
-              <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+            <div className="mt-8">
+              <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
                 Частые <em className="lux-h1-italic text-primary">вопросы</em>.
               </h2>
             </div>
           </div>
         </Reveal>
 
-        <div className="border-t border-hairline max-w-3xl mx-auto md:mx-0 md:ml-[33.333%]">
+        <div className="border-t border-hairline max-w-3xl mx-auto">
           {faq.map((item, i) => (
             <Reveal key={item.q} delay={i * 60}>
               <details className="group border-b border-hairline py-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
@@ -924,9 +902,9 @@ const Landing = () => {
             <div className="absolute -bottom-32 -left-32 w-[520px] h-[520px] rounded-full bg-secondary/20 blur-3xl" />
 
             <div className="relative px-5 sm:px-8 md:px-16 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-10 items-end">
-              <div className="md:col-span-7">
+              <div className="md:col-span-7 text-center">
                 <p className="lux-eyebrow mb-6">Issue No. 01 · Cover</p>
-                <h2 className="lux-h1 text-[40px] min-[390px]:text-[48px] md:text-[88px] tracking-[-0.04em]">
+                <h2 className="lux-h1 text-center text-[40px] min-[390px]:text-[48px] md:text-[88px] tracking-[-0.04em]">
                   Сегодня вечером —
                   <br /> кто-то уже собирает
                   <br /> вечер для <em className="lux-h1-italic text-primary">тебя</em>.
@@ -978,7 +956,6 @@ const Landing = () => {
                 <li><a href="#features" className="lux-link hover:text-foreground">Возможности</a></li>
                 <li><a href="#how" className="lux-link hover:text-foreground">Как работает</a></li>
                 <li><Link to="/partners" className="lux-link hover:text-foreground">Партнёрам</Link></li>
-                <li><Link to="/" className="lux-link hover:text-foreground">Прототип</Link></li>
                 <li><Link to="/admin" className="lux-link hover:text-foreground">Админка</Link></li>
               </ul>
             </div>

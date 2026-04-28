@@ -1,0 +1,50 @@
+{
+  "name": "frendly-landing",
+  "groups": [
+    "frendly"
+  ],
+  "share": [
+    "package.json",
+    "README.md",
+    {
+      "path": "src",
+      "label": "landing-src"
+    },
+    {
+      "path": "package-lock.json",
+      "label": "landing-package-lock"
+    },
+    {
+      "path": "index.html",
+      "label": "landing-html"
+    },
+    {
+      "path": "vite.config.ts",
+      "label": "landing-vite-config"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "label": "landing-tailwind-config"
+    },
+    {
+      "path": "tsconfig.json",
+      "label": "landing-tsconfig"
+    },
+    {
+      "path": "eslint.config.js",
+      "label": "landing-eslint-config"
+    },
+    {
+      "path": "Dockerfile",
+      "label": "landing-dockerfile"
+    },
+    {
+      "path": "nginx.conf",
+      "label": "landing-nginx"
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "label": "landing-deploy-workflow"
+    }
+  ]
+}

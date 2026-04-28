@@ -30,6 +30,7 @@ import {
   Globe,
   Lock,
   Moon,
+  Search,
 } from "lucide-react";
 import iconV5 from "@/assets/icon-v5-sage.png";
 import eventWine from "@/assets/event-wine.jpg";
@@ -83,12 +84,13 @@ const PhoneShell = ({ children, dark = false }: { children: React.ReactNode; dar
         dark ? "bg-[hsl(var(--ad-bg))]" : "bg-paper"
       }`}
     >
+      {dark && <div className="absolute top-0 left-0 right-0 h-9 bg-paper z-10" />}
       {/* Notch */}
       <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-24 h-6 bg-foreground rounded-full z-30" />
       {/* Status bar */}
       <div className="absolute top-3 left-6 right-6 flex items-center justify-between text-[10px] font-semibold z-20 text-foreground/70">
-        <span className={dark ? "text-[hsl(var(--ad-fg-soft))]" : ""}>21:42</span>
-        <span className={dark ? "text-[hsl(var(--ad-fg-soft))]" : ""}>•••</span>
+        <span className={dark ? "text-foreground" : ""}>21:42</span>
+        <span className={dark ? "text-foreground" : ""}>•••</span>
       </div>
       {/* Scene content area: top padding for status bar, bottom padding for home indicator */}
       <div className="absolute inset-0 pt-9 pb-7 overflow-hidden">{children}</div>
@@ -743,22 +745,20 @@ const SceneLive = ({ frame }: { frame: number }) => {
 
 const SceneAfterDark = ({ frame }: { frame: number }) => {
   const cats = [
+    { e: "", t: "Все" },
     { e: "🌃", t: "Найтлайф" },
-    { e: "💋", t: "Speed dating" },
+    { e: "💋", t: "Свидания" },
     { e: "♨️", t: "Wellness" },
-    { e: "🖤", t: "Inner Circle" },
-    { e: "🩷", t: "Play Lounge" },
   ];
-  const activeCat = Math.floor(frame / 60) % cats.length;
+  const activeCat = Math.floor(frame / 85) % cats.length;
 
   const reveal = eo(range(frame, 5, 35));
-  const heroIn = eo(range(frame, 30, 75));
-  const card2In = eo(range(frame, 75, 115));
-  const consentIn = eo(range(frame, 130, 170));
+  const headerIn = eo(range(frame, 20, 50));
+  const controlsIn = eo(range(frame, 45, 80));
+  const eventIn = eo(range(frame, 70, 115));
   const requestPress = range(frame, 190, 215);
   const requested = frame > 215;
 
-  // pulse for ambient
   const a = (Math.sin(frame * 0.05) + 1) / 2;
   const b = (Math.cos(frame * 0.06) + 1) / 2;
 
@@ -784,275 +784,185 @@ const SceneAfterDark = ({ frame }: { frame: number }) => {
       />
 
       {/* Header */}
-      <div className="relative px-3 pt-2 flex items-center justify-between shrink-0">
-        <div className="w-6 h-6 rounded-full bg-[hsl(var(--ad-surface))] border border-[hsl(var(--ad-border))] flex items-center justify-center">
-          <ChevronDown className="w-3 h-3 rotate-90" />
+      <div
+        className="relative px-5 pt-4 flex items-center justify-between shrink-0"
+        style={{ opacity: headerIn, transform: `translateY(${(1 - headerIn) * -10}px)` }}
+      >
+        <div className="w-8 h-8 rounded-full flex items-center justify-center">
+          <ChevronDown className="w-5 h-5 rotate-90 text-white" strokeWidth={2.4} />
         </div>
-        <div className="flex items-center gap-1">
-          <Moon className="w-3 h-3" style={{ color: "hsl(var(--ad-magenta))" }} />
+        <div className="flex items-center gap-2">
+          <Moon className="w-4 h-4" style={{ color: "hsl(var(--ad-magenta))" }} />
           <span
-            className="font-display text-[10px] font-bold uppercase tracking-[0.25em] bg-clip-text text-transparent"
+            className="font-display text-[14px] font-bold uppercase tracking-[0.14em] bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-neon)" }}
           >
-            After Dark
+            AFTER DARK
           </span>
         </div>
-        <div
-          className="px-1.5 h-4 rounded-full border flex items-center gap-0.5 text-[8px] font-bold"
-          style={{
-            borderColor: "hsl(var(--ad-cyan) / 0.5)",
-            color: "hsl(var(--ad-cyan))",
-            background: "hsl(var(--ad-cyan) / 0.08)",
-          }}
-        >
-          <ShieldCheck className="w-2.5 h-2.5" /> 18+
+        <div className="w-8 h-8 rounded-full flex items-center justify-center">
+          <ShieldCheck className="w-5 h-5" style={{ color: "hsl(var(--ad-cyan))" }} strokeWidth={2.2} />
         </div>
       </div>
 
-      {/* Title */}
-      <div className="relative px-3 mt-2 shrink-0">
-        <p
-          className="font-display text-[8px] uppercase tracking-[0.22em] font-semibold"
-          style={{ color: "hsl(var(--ad-fg-mute))" }}
+      {/* Hero */}
+      <div
+        className="relative px-5 mt-5 shrink-0"
+        style={{ opacity: headerIn, transform: `translateY(${(1 - headerIn) * 14}px)` }}
+      >
+        <p className="font-display text-[11px] uppercase tracking-[0.14em] font-semibold flex items-center gap-2" style={{ color: "hsl(var(--ad-fg-mute))" }}>
+          <span style={{ color: "hsl(var(--ad-gold))" }}>✧</span> Сегодня ночью
+        </p>
+        <div className="mt-2 flex items-start justify-between gap-3">
+          <p className="font-display font-semibold text-[26px] leading-[1.05] tracking-[-0.04em] text-white">
+            <span className="whitespace-nowrap">8 приватных</span>
+            <br />
+            события
+          </p>
+          <button
+            className="mt-1 h-10 px-3.5 rounded-full font-display text-[12px] font-bold text-white shrink-0"
+            style={{
+              background: "var(--gradient-neon)",
+              boxShadow: "0 14px 42px hsl(var(--ad-magenta) / 0.38)",
+              transform: `scale(${1 - requestPress * 0.04})`,
+            }}
+          >
+            Создать 18+
+          </button>
+        </div>
+      </div>
+
+      {/* Search */}
+      <div
+        className="relative px-5 mt-5 shrink-0"
+        style={{ opacity: controlsIn, transform: `translateY(${(1 - controlsIn) * 10}px)` }}
+      >
+        <div
+          className="h-12 rounded-[18px] border flex items-center gap-3 px-4"
+          style={{
+            borderColor: "hsl(var(--ad-border))",
+            background: "hsl(var(--ad-bg) / 0.62)",
+          }}
         >
-          ✦ Сегодня ночью
-        </p>
-        <p className="font-display font-semibold text-[15px] leading-tight mt-0.5">
-          12 приватных событий
-        </p>
+          <Search className="w-4 h-4 shrink-0" style={{ color: "hsl(var(--ad-fg-mute))" }} />
+          <span className="text-[12.5px] whitespace-nowrap truncate" style={{ color: "hsl(var(--ad-fg-mute))" }}>
+            Найти событие или место
+          </span>
+        </div>
       </div>
 
       {/* Category chips */}
-      <div className="relative px-3 mt-2 flex gap-1 overflow-hidden shrink-0">
+      <div
+        className="relative pl-5 pr-0 mt-3 flex gap-2 overflow-hidden shrink-0"
+        style={{ opacity: controlsIn, transform: `translateY(${(1 - controlsIn) * 10}px)` }}
+      >
         {cats.map((c, i) => {
           const sel = i === activeCat;
           return (
             <div
               key={c.t}
-              className="px-1.5 h-5 rounded-full flex items-center gap-0.5 text-[8px] font-bold whitespace-nowrap border transition-all"
+              className="h-9 px-3.5 rounded-full flex items-center gap-1.5 text-[12px] font-bold whitespace-nowrap border transition-all"
               style={{
-                background: sel ? "var(--gradient-neon)" : "hsl(var(--ad-surface))",
+                background: sel ? "var(--gradient-neon)" : "hsl(var(--ad-surface) / 0.72)",
                 borderColor: sel ? "transparent" : "hsl(var(--ad-border))",
                 color: sel ? "hsl(var(--ad-fg))" : "hsl(var(--ad-fg-soft))",
                 boxShadow: sel ? "var(--shadow-neon)" : undefined,
-                transform: sel ? "scale(1.04)" : "scale(1)",
               }}
             >
-              <span className="text-[9px]">{c.e}</span>
+              {c.e && <span className="text-[14px]">{c.e}</span>}
               {c.t}
             </div>
           );
         })}
       </div>
 
-      {/* Cards stack — flex-1 with gap */}
-      <div className="relative flex-1 min-h-0 flex flex-col gap-1.5 px-3 mt-2 pb-2">
-        {/* Hero card — Inner Circle */}
+      {/* Events */}
+      <div className="relative flex-1 min-h-0 px-5 mt-3 pb-3 overflow-hidden">
         <div
-          className="relative rounded-2xl overflow-hidden border shrink-0"
+          className="relative rounded-[24px] overflow-hidden border"
           style={{
-            borderColor: "hsl(var(--ad-magenta) / 0.4)",
-            background:
-              "linear-gradient(135deg, hsl(var(--ad-magenta) / 0.18), hsl(var(--ad-violet) / 0.22))",
-            opacity: heroIn,
-            transform: `translateY(${(1 - heroIn) * 18}px)`,
-            boxShadow: "0 8px 30px hsl(var(--ad-magenta) / 0.25)",
+            borderColor: "hsl(var(--ad-border))",
+            background: "hsl(var(--ad-surface) / 0.92)",
+            opacity: eventIn,
+            transform: `translateY(${(1 - eventIn) * 20}px)`,
+            boxShadow: "0 18px 55px hsl(var(--ad-bg) / 0.48)",
           }}
         >
-          <div className="relative h-[64px] overflow-hidden">
+          <div className="relative h-[76px] overflow-hidden">
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(ellipse at 30% 60%, hsl(var(--ad-magenta) / 0.6), transparent 55%), radial-gradient(ellipse at 75% 45%, hsl(var(--ad-violet) / 0.7), transparent 60%), linear-gradient(180deg, hsl(var(--ad-bg)) 0%, transparent 50%)",
+                  "radial-gradient(circle at 18% 30%, hsl(var(--ad-magenta) / 0.86), transparent 42%), radial-gradient(circle at 78% 35%, hsl(var(--ad-violet) / 0.84), transparent 48%), linear-gradient(135deg, hsl(var(--ad-surface-elev)), hsl(var(--ad-bg)))",
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center text-[34px] opacity-90">
-              🖤
+            <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "linear-gradient(135deg, transparent 0 42%, hsl(var(--ad-cyan) / 0.45) 43% 45%, transparent 46% 100%)" }} />
+            <div className="absolute top-2.5 left-2.5 h-5 px-2 rounded-full bg-black/35 backdrop-blur flex items-center gap-1 text-[9px] font-bold text-white">
+              <Flame className="w-3 h-3" style={{ color: "hsl(var(--ad-magenta))" }} />
+              Найтлайф
             </div>
-            <div className="absolute top-1 left-1 flex gap-1">
-              <div
-                className="font-display px-1.5 h-4 rounded-full flex items-center gap-0.5 text-[7px] font-bold"
-                style={{
-                  background: "hsl(var(--ad-bg) / 0.7)",
-                  color: "hsl(var(--ad-magenta))",
-                  backdropFilter: "blur(4px)",
-                }}
-              >
-                <Flame className="w-2 h-2" /> Inner Circle
-              </div>
-              <div
-                className="font-display px-1.5 h-4 rounded-full flex items-center gap-0.5 text-[7px] font-bold"
-                style={{
-                  background: "hsl(var(--ad-bg) / 0.7)",
-                  color: "hsl(var(--ad-cyan))",
-                  backdropFilter: "blur(4px)",
-                }}
-              >
-                <Lock className="w-2 h-2" /> NDA
-              </div>
+            <div className="absolute top-2.5 right-2.5 h-5 px-2 rounded-full bg-black/35 backdrop-blur flex items-center gap-1 text-[9px] font-bold" style={{ color: "hsl(var(--ad-cyan))" }}>
+              <ShieldCheck className="w-3 h-3" />
+              Verified
             </div>
-            <div
-              className="font-display absolute top-1 right-1 px-1.5 h-4 rounded-full flex items-center gap-0.5 text-[7px] font-bold"
-              style={{
-                background: "var(--gradient-neon)",
-                color: "hsl(var(--ad-bg))",
-              }}
-            >
-              <Star className="w-2 h-2" /> Verified
+            <div className="absolute bottom-2.5 left-3 right-3">
+              <p className="font-display text-[19px] leading-none font-semibold text-white tracking-[-0.04em]">
+                Velvet Room
+              </p>
+              <p className="mt-1 text-[9px] text-white/70">закрытый лаунж · сегодня 23:30</p>
             </div>
           </div>
 
-          <div className="p-2">
-            <p className="font-display font-semibold text-[12px] leading-tight">
-              Velvet Room · Closed Play
-            </p>
-            <p
-              className="text-[8px] mt-0.5 flex items-center gap-1"
-              style={{ color: "hsl(var(--ad-fg-mute))" }}
-            >
-              <MapPin className="w-2 h-2" /> Локация после approve · 23:30
-            </p>
-
-            <div className="mt-1.5 flex items-center gap-1 text-[8px] flex-wrap">
+          <div className="p-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-[9.5px] leading-snug" style={{ color: "hsl(var(--ad-fg-soft))" }}>
+                Приватный вход, NDA, пары и синглы после верификации.
+              </p>
               <span
-                className="font-display px-1.5 h-4 rounded-full flex items-center gap-0.5 font-bold border"
+                className="h-7 px-2.5 rounded-full flex items-center text-[9px] font-bold shrink-0"
+                style={{
+                  color: requested ? "hsl(var(--ad-cyan))" : "white",
+                  background: requested ? "hsl(var(--ad-cyan) / 0.14)" : "var(--gradient-neon)",
+                }}
+              >
+                {requested ? "В заявках" : "Войти"}
+              </span>
+            </div>
+
+            <div className="mt-2 flex items-center gap-1.5">
+              <span
+                className="h-6 px-2 rounded-full flex items-center gap-1 text-[9px] font-bold border"
                 style={{
                   borderColor: "hsl(var(--ad-border))",
                   color: "hsl(var(--ad-fg-soft))",
-                  background: "hsl(var(--ad-surface))",
+                  background: "hsl(var(--ad-bg) / 0.48)",
                 }}
               >
                 👥 24 / 30
               </span>
               <span
-                className="font-display px-1.5 h-4 rounded-full flex items-center gap-0.5 font-bold border"
+                className="h-6 px-2 rounded-full flex items-center gap-1 text-[9px] font-bold border"
                 style={{
                   borderColor: "hsl(var(--ad-border))",
                   color: "hsl(var(--ad-fg-soft))",
-                  background: "hsl(var(--ad-surface))",
+                  background: "hsl(var(--ad-bg) / 0.48)",
                 }}
               >
-                💞 пары · синглы
+                <MapPin className="w-3 h-3" /> центр
               </span>
               <span
-                className="font-display px-1.5 h-4 rounded-full flex items-center font-bold"
+                className="h-6 px-2 rounded-full flex items-center gap-1 text-[9px] font-bold border"
                 style={{
-                  color: "hsl(var(--ad-magenta))",
-                  background: "hsl(var(--ad-magenta) / 0.12)",
+                  borderColor: "hsl(var(--ad-cyan) / 0.35)",
+                  color: "hsl(var(--ad-cyan))",
+                  background: "hsl(var(--ad-cyan) / 0.12)",
                 }}
               >
-                kink-friendly
+                <ShieldCheck className="w-3 h-3" /> Кодекс
               </span>
             </div>
-
-            <button
-              className="font-display mt-2 w-full h-7 rounded-xl font-bold text-[10px] flex items-center justify-center gap-1.5"
-              style={{
-                background: requested ? "hsl(var(--ad-cyan) / 0.18)" : "var(--gradient-neon)",
-                color: requested ? "hsl(var(--ad-cyan))" : "hsl(var(--ad-bg))",
-                boxShadow: requested ? "none" : "var(--shadow-neon)",
-                transform: `scale(${1 - requestPress * 0.06})`,
-                border: requested ? "1px solid hsl(var(--ad-cyan) / 0.4)" : "none",
-              }}
-            >
-              {requested ? (
-                <>
-                  <Check className="w-3 h-3" /> Заявка отправлена
-                </>
-              ) : (
-                <>
-                  <Lock className="w-3 h-3" /> Запросить доступ
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Second card — wellness */}
-        <div
-          className="relative rounded-2xl border p-2 flex items-center gap-2 shrink-0"
-          style={{
-            borderColor: "hsl(var(--ad-border))",
-            background: "hsl(var(--ad-surface))",
-            opacity: card2In,
-            transform: `translateY(${(1 - card2In) * 18}px)`,
-          }}
-        >
-          <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center text-[16px] shrink-0"
-            style={{
-              background:
-                "linear-gradient(135deg, hsl(var(--ad-violet) / 0.3), hsl(var(--ad-magenta) / 0.25))",
-            }}
-          >
-            ♨️
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display font-semibold text-[10px] truncate leading-tight">
-              Steam & Silk · 01:00
-            </p>
-            <p
-              className="text-[8px] truncate leading-tight"
-              style={{ color: "hsl(var(--ad-fg-mute))" }}
-            >
-              термы · swing-friendly · couples only
-            </p>
-            <div className="mt-1 flex -space-x-1.5">
-              {[0, 1, 2, 3].map((k) => (
-                <div
-                  key={k}
-                  className="w-3 h-3 rounded-full border"
-                  style={{
-                    background: `hsl(${320 + k * 15} 50% 55%)`,
-                    borderColor: "hsl(var(--ad-bg))",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          <div
-            className="font-display px-1.5 h-5 rounded-full text-[8px] font-bold flex items-center shrink-0"
-            style={{
-              background: "hsl(var(--ad-magenta) / 0.18)",
-              color: "hsl(var(--ad-magenta))",
-            }}
-          >
-            12 пар
-          </div>
-        </div>
-
-        {/* spacer pushes consent to bottom */}
-        <div className="flex-1 min-h-0" />
-
-        {/* Consent footer — in flow, not absolute */}
-        <div
-          className="relative rounded-2xl border p-2 flex items-center gap-2 shrink-0"
-          style={{
-            borderColor: "hsl(var(--ad-cyan) / 0.35)",
-            background:
-              "linear-gradient(135deg, hsl(var(--ad-cyan) / 0.12), hsl(var(--ad-violet) / 0.12))",
-            backdropFilter: "blur(8px)",
-            opacity: consentIn,
-            transform: `translateY(${(1 - consentIn) * 16}px)`,
-          }}
-        >
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-            style={{
-              background: "hsl(var(--ad-cyan) / 0.2)",
-              boxShadow: `0 0 0 ${2 + 2 * Math.sin(frame * 0.2)}px hsl(var(--ad-cyan) / 0.18)`,
-            }}
-          >
-            <ShieldCheck className="w-3.5 h-3.5" style={{ color: "hsl(var(--ad-cyan))" }} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display text-[10px] font-bold leading-tight">Кодекс After Dark</p>
-            <p
-              className="text-[8px] leading-tight truncate"
-              style={{ color: "hsl(var(--ad-fg-mute))" }}
-            >
-              Consent · No photo · Awareness team on-site
+            <p className="mt-2 text-[8.5px] truncate" style={{ color: "hsl(var(--ad-fg-mute))" }}>
+              Кодекс согласия включен · no photo · awareness team
             </p>
           </div>
         </div>
@@ -1933,13 +1843,13 @@ export const AnimatedDemo = () => {
       <div className="absolute inset-0 -z-10 lux-paper opacity-60" />
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-28 md:py-36">
         {/* Editorial section header */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
-          <div className="md:col-span-4">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <div>
             <p className="lux-eyebrow">Live · Demonstration</p>
-            <div className="mt-3 w-12 lux-rule" />
+            <div className="mt-3 w-12 lux-rule mx-auto" />
           </div>
-          <div className="md:col-span-8">
-            <h2 className="lux-h1 text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
+          <div className="mt-8">
+            <h2 className="lux-h1 text-center text-[36px] min-[390px]:text-[42px] md:text-[68px] tracking-[-0.035em]">
               Посмотри, как это <em className="lux-h1-italic text-primary">работает</em> —
               прямо в кадре.
             </h2>

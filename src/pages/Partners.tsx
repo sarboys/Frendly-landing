@@ -775,7 +775,6 @@ const Partners = () => {
               <p className="lux-eyebrow text-[10px] mb-5">Frendly</p>
               <ul className="space-y-3 text-[13px] text-ink-soft font-light">
                 <li><Link to="/" className="lux-link hover:text-foreground">Для пользователей</Link></li>
-                <li><Link to="/" className="lux-link hover:text-foreground">Прототип</Link></li>
                 <li><Link to="/admin" className="lux-link hover:text-foreground">Админка</Link></li>
               </ul>
             </div>
