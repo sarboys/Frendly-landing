@@ -947,7 +947,7 @@ const Landing = () => {
                 «Вечера, а не свайпы. Камерные встречи в твоём городе — каждый вечер.»
               </p>
               <p className="lux-eyebrow text-[10px] mt-6">
-                Est. MMXXVI · Made in Москва · Тбилиси
+                Est. MMXXVI · {new Date().getFullYear()} · ИП Поляков Сергей Викторович
               </p>
             </div>
             <div className="md:col-span-2">
@@ -988,9 +988,11 @@ const Landing = () => {
           <div className="pt-8 flex flex-wrap justify-between items-center gap-3 text-[11px] text-ink-mute tracking-wide">
             <p>© MMXXVI Frendly. Все права защищены.</p>
             <div className="flex flex-wrap gap-x-7 gap-y-3">
-              <a href="#" className="lux-link hover:text-foreground">Условия</a>
-              <a href="#" className="lux-link hover:text-foreground">Приватность</a>
-              <a href="#" className="lux-link hover:text-foreground">Поддержка</a>
+              <Link to="/legal/terms" className="lux-link hover:text-foreground">Условия</Link>
+              <Link to="/legal/privacy" className="lux-link hover:text-foreground">Приватность</Link>
+              <Link to="/legal/personal-data-consent" className="lux-link hover:text-foreground">Согласие ПДн</Link>
+              <Link to="/legal" className="lux-link hover:text-foreground">Реквизиты</Link>
+              <a href="mailto:team@frendly.tech" className="lux-link hover:text-foreground">Поддержка</a>
             </div>
           </div>
         </div>

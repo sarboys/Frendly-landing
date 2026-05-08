@@ -738,7 +738,11 @@ const Partners = () => {
                   Отправить заявку <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 <p className="text-[10px] text-ink-mute text-center tracking-wide">
-                  Нажимая кнопку, ты соглашаешься на обработку данных.
+                  Нажимая кнопку, ты соглашаешься на{" "}
+                  <Link to="/legal/personal-data-consent" className="lux-link hover:text-foreground">
+                    обработку данных
+                  </Link>
+                  .
                 </p>
               </form>
             </div>
@@ -759,7 +763,7 @@ const Partners = () => {
                 «Платформа для заведений, которые растут вместе с городом.»
               </p>
               <p className="lux-eyebrow text-[10px] mt-6">
-                Est. MMXXVI · partners@frendly.app
+                Est. MMXXVI · team@frendly.tech · ИП Поляков Сергей Викторович
               </p>
             </div>
             <div className="md:col-span-3">
@@ -783,9 +787,10 @@ const Partners = () => {
           <div className="pt-8 flex flex-wrap justify-between items-center gap-3 text-[11px] text-ink-mute tracking-wide">
             <p>© MMXXVI Frendly. Все права защищены.</p>
             <div className="flex flex-wrap gap-x-7 gap-y-3">
-              <a href="#" className="lux-link hover:text-foreground">Условия партнёрства</a>
-              <a href="#" className="lux-link hover:text-foreground">Приватность</a>
-              <a href="mailto:partners@frendly.app" className="lux-link hover:text-foreground">partners@frendly.app</a>
+              <Link to="/legal/partners" className="lux-link hover:text-foreground">Условия партнёрства</Link>
+              <Link to="/legal/privacy" className="lux-link hover:text-foreground">Приватность</Link>
+              <Link to="/legal" className="lux-link hover:text-foreground">Реквизиты</Link>
+              <a href="mailto:team@frendly.tech" className="lux-link hover:text-foreground">team@frendly.tech</a>
             </div>
           </div>
         </div>
