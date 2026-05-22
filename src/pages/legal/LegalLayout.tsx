@@ -8,37 +8,58 @@ type LegalLayoutProps = {
 };
 
 export const LegalLayout = ({ children }: LegalLayoutProps) => (
-  <main className="site-shell min-h-screen bg-paper text-foreground overflow-x-hidden font-sans-lux relative">
-    <div className="fixed inset-0 pointer-events-none -z-10 lux-paper" />
+  <main className="landing-theme site-shell min-h-screen w-full bg-hero text-foreground overflow-x-hidden">
+    <div className="pointer-events-none fixed inset-0 z-0">
+      <div className="absolute -top-40 -left-32 size-[36rem] rounded-full bg-lime-gradient opacity-20 blur-[120px]" />
+      <div className="absolute top-1/4 -right-40 size-[34rem] rounded-full bg-pink-gradient opacity-20 blur-[120px]" />
+      <div
+        className="absolute bottom-0 left-1/4 size-[28rem] rounded-full opacity-15 blur-[120px]"
+        style={{ background: "radial-gradient(circle, oklch(0.7 0.18 305), transparent 70%)" }}
+      />
+    </div>
 
-    <nav className="sticky top-0 z-40 backdrop-blur-xl bg-paper/85 border-b border-hairline/60">
-      <div className="max-w-[1180px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 group">
-          <Logo size="sm" tone="dark" />
-          <span className="hidden md:inline-block ml-3 lux-eyebrow text-[9px]">Legal</span>
+    <header className="relative z-30 sticky top-0">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-4 flex items-center justify-between gap-4">
+        <Link
+          to="/"
+          className="glass border border-white/10 rounded-2xl px-3 py-2 flex items-center gap-2 shadow-soft"
+        >
+          <Logo size="sm" />
+          <span className="hidden sm:inline text-[10px] uppercase tracking-[0.18em] text-muted-foreground pl-2 border-l border-white/10">
+            Legal
+          </span>
         </Link>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-[12px] tracking-[0.16em] uppercase font-semibold text-ink-soft hover:text-foreground transition-colors lux-link"
+          className="rounded-full border border-white/10 px-4 py-2.5 text-sm font-semibold text-foreground/90 hover:bg-white/10 transition inline-flex items-center gap-2"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="size-4" />
           На главную
         </Link>
       </div>
-    </nav>
+    </header>
 
-    <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-12 md:py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+    <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10 pt-10 pb-20 lg:pt-16">
+      <div className="mb-10 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+        <span>N° Legal · Frendly</span>
+        <span className="hidden sm:inline">Условия · Приватность · Реквизиты</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         <aside className="lg:col-span-4 xl:col-span-3">
           <div className="lg:sticky lg:top-24">
-            <p className="lux-eyebrow text-[10px] mb-5">Документы</p>
-            <div className="space-y-2">
+            <div className="glass border border-white/10 rounded-[2rem] p-4 shadow-soft">
+              <p className="px-3 pb-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                Документы
+              </p>
               <NavLink
                 to="/legal"
                 end
                 className={({ isActive }) =>
-                  `block border-b border-hairline py-3 text-[14px] transition-colors ${
-                    isActive ? "text-foreground" : "text-ink-soft hover:text-foreground"
+                  `block rounded-2xl px-3 py-3 text-sm transition ${
+                    isActive
+                      ? "bg-lime-gradient text-lime-foreground font-bold shadow-glow"
+                      : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                   }`
                 }
               >
@@ -49,8 +70,10 @@ export const LegalLayout = ({ children }: LegalLayoutProps) => (
                   key={document.slug}
                   to={`/legal/${document.slug}`}
                   className={({ isActive }) =>
-                    `block border-b border-hairline py-3 text-[14px] transition-colors ${
-                      isActive ? "text-foreground" : "text-ink-soft hover:text-foreground"
+                    `mt-1 block rounded-2xl px-3 py-3 text-sm transition ${
+                      isActive
+                        ? "bg-lime-gradient text-lime-foreground font-bold shadow-glow"
+                        : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                     }`
                   }
                 >
@@ -59,15 +82,20 @@ export const LegalLayout = ({ children }: LegalLayoutProps) => (
               ))}
             </div>
 
-            <div className="mt-10 border border-hairline bg-paper/60 p-5 shadow-soft">
-              <p className="lux-eyebrow text-[9px] mb-4">Контакты</p>
-              <div className="space-y-3 text-[13px] text-ink-soft leading-relaxed">
-                <a href={`mailto:${companyDetails.email}`} className="flex items-center gap-2 lux-link hover:text-foreground">
-                  <Mail className="w-4 h-4" />
+            <div className="mt-4 glass border border-white/10 rounded-[2rem] p-5 shadow-soft">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-4">
+                Поддержка
+              </p>
+              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <a
+                  href={`mailto:${companyDetails.email}`}
+                  className="flex items-center gap-2 hover:text-foreground transition"
+                >
+                  <Mail className="size-4 text-lime" />
                   {companyDetails.email}
                 </a>
                 <p className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                  <MapPin className="size-4 mt-0.5 shrink-0 text-lime" />
                   {companyDetails.address}
                 </p>
               </div>

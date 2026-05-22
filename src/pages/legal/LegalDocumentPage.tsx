@@ -12,18 +12,30 @@ const LegalDocumentPage = () => {
 
   return (
     <LegalLayout>
-      <article className="max-w-4xl">
-        <p className="lux-eyebrow">Обновлено · {document.updatedAt}</p>
-        <h1 className="lux-h1 mt-5 text-[38px] min-[390px]:text-[46px] md:text-[72px] tracking-[-0.04em] leading-[0.95]">
+      <article className="max-w-5xl">
+        <div className="inline-flex items-center gap-2 glass border border-white/10 rounded-full px-3 py-1.5 text-xs">
+          <span className="size-1.5 rounded-full bg-lime" />
+          Обновлено · {document.updatedAt}
+        </div>
+
+        <h1 className="mt-6 font-display font-semibold leading-[0.95] tracking-[-0.04em] text-[clamp(38px,7vw,88px)]">
           {document.title}
         </h1>
-        <p className="mt-7 text-[16px] md:text-[18px] text-ink-soft leading-[1.7] max-w-2xl">{document.description}</p>
 
-        <div className="mt-12 border-t border-hairline">
+        <p className="mt-7 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
+          {document.description}
+        </p>
+
+        <div className="mt-10 glass border border-white/10 rounded-[2rem] p-5 md:p-8 shadow-soft">
           {document.sections.map((section) => (
-            <section key={section.title} className="py-8 border-b border-hairline">
-              <h2 className="font-display text-[24px] md:text-[30px] leading-tight tracking-tight">{section.title}</h2>
-              <div className="mt-5 space-y-4 text-[15px] md:text-[16px] text-ink-soft leading-[1.75]">
+            <section
+              key={section.title}
+              className="border-t border-white/10 py-7 first:border-t-0 first:pt-0 last:pb-0"
+            >
+              <h2 className="font-display text-2xl md:text-3xl leading-tight font-semibold">
+                {section.title}
+              </h2>
+              <div className="mt-5 space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
                 {section.body.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}

@@ -17,42 +17,68 @@ const detailRows = [
 
 const LegalIndex = () => (
   <LegalLayout>
-    <div className="max-w-4xl">
-      <p className="lux-eyebrow">Frendly · Legal</p>
-      <h1 className="lux-h1 mt-5 text-[42px] min-[390px]:text-[52px] md:text-[78px] tracking-[-0.04em] leading-[0.95]">
+    <div className="max-w-5xl">
+      <div className="inline-flex items-center gap-2 glass border border-white/10 rounded-full px-3 py-1.5 text-xs">
+        <span className="size-1.5 rounded-full bg-lime animate-pulse" />
+        Публичные документы Frendly
+      </div>
+
+      <h1 className="mt-6 font-display font-semibold leading-[0.95] tracking-[-0.04em] text-[clamp(44px,8vw,104px)]">
         Правовая
-        <br />
-        информация
+        {" "}
+        <span className="block text-muted-foreground/60">информация</span>
       </h1>
-      <p className="mt-7 text-[16px] md:text-[18px] text-ink-soft leading-[1.7] max-w-2xl">
+
+      <p className="mt-7 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
         Здесь собраны реквизиты оператора, условия использования Frendly, политика обработки персональных данных,
         согласие на обработку персональных данных и контакты поддержки.
       </p>
 
-      <div className="mt-12 border-y border-hairline divide-y divide-hairline">
+      <div className="mt-10 glass border border-white/10 rounded-[2rem] p-4 md:p-6 shadow-soft">
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold">Реквизиты</h2>
+          <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            ИП
+          </span>
+        </div>
         {detailRows.map(([label, value]) => (
-          <div key={label} className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-5 py-5">
-            <div className="sm:col-span-4 lux-eyebrow text-[9px]">{label}</div>
-            <div className="sm:col-span-8 text-[15px] md:text-[16px] text-foreground leading-relaxed">{value}</div>
+          <div
+            key={label}
+            className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-5 border-t border-white/10 py-4 first:border-t-0 first:pt-0"
+          >
+            <div className="sm:col-span-4 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              {label}
+            </div>
+            <div className="sm:col-span-8 text-sm md:text-base text-foreground leading-relaxed">
+              {value}
+            </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         {legalDocuments.map((document) => (
           <Link
             key={document.slug}
             to={`/legal/${document.slug}`}
-            className="group border border-hairline bg-paper/60 p-5 shadow-soft hover:border-foreground/25 transition-colors"
+            className="group glass border border-white/10 rounded-[2rem] p-5 shadow-soft hover:border-lime/40 hover:-translate-y-1 transition duration-300"
           >
             <div className="flex items-start justify-between gap-5">
               <div>
-                <p className="lux-eyebrow text-[9px] mb-3">Обновлено · {document.updatedAt}</p>
-                <h2 className="font-display text-[22px] leading-tight tracking-tight">{document.title}</h2>
+                <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  Обновлено · {document.updatedAt}
+                </p>
+                <h2 className="font-display text-xl md:text-2xl leading-tight font-semibold">
+                  {document.title}
+                </h2>
               </div>
-              <ArrowRight className="w-4 h-4 mt-1 text-ink-mute group-hover:text-foreground transition-colors" />
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white/10 text-muted-foreground group-hover:bg-lime group-hover:text-lime-foreground transition">
+                <ArrowRight className="size-4" />
+              </span>
             </div>
-            <p className="mt-4 text-[14px] text-ink-soft leading-relaxed">{document.description}</p>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+              {document.description}
+            </p>
           </Link>
         ))}
       </div>
