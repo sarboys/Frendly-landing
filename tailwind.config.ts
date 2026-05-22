@@ -62,6 +62,22 @@ export default {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
+        lime: {
+          DEFAULT: "hsl(var(--fr-lime))",
+          foreground: "hsl(var(--fr-lime-foreground))",
+        },
+        lilac: {
+          DEFAULT: "hsl(var(--fr-lilac))",
+          foreground: "hsl(var(--fr-lilac-foreground))",
+        },
+        pink: {
+          DEFAULT: "hsl(var(--fr-pink))",
+          foreground: "hsl(var(--fr-pink-foreground))",
+        },
+        surface: {
+          DEFAULT: "hsl(var(--fr-surface))",
+          2: "hsl(var(--fr-surface-2))",
+        },
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
@@ -108,6 +124,7 @@ export default {
       boxShadow: {
         card: "var(--shadow-card)",
         soft: "var(--shadow-soft)",
+        glow: "var(--fr-shadow-glow)",
         nav: "var(--shadow-nav)",
         neon: "var(--shadow-neon)",
         paper: "var(--shadow-paper)",

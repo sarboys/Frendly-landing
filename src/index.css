@@ -345,6 +345,92 @@
   to { transform: scaleX(1); }
 }
 
+.landing-theme {
+  --background: 267 39% 18%;
+  --foreground: 285 35% 98%;
+  --muted-foreground: 268 14% 78%;
+  --border: 0 0% 100% / 0.08;
+  --fr-surface: 267 36% 24%;
+  --fr-surface-2: 267 34% 30%;
+  --fr-lime: 84 90% 66%;
+  --fr-lime-foreground: 267 48% 18%;
+  --fr-lilac: 271 78% 77%;
+  --fr-lilac-foreground: 267 48% 18%;
+  --fr-pink: 337 88% 70%;
+  --fr-pink-foreground: 285 35% 98%;
+  --fr-gradient-hero: linear-gradient(160deg, hsl(267 42% 28%) 0%, hsl(267 39% 18%) 60%);
+  --fr-gradient-lime: linear-gradient(135deg, hsl(84 90% 68%), hsl(129 76% 61%));
+  --fr-gradient-pink: linear-gradient(135deg, hsl(289 78% 75%), hsl(337 88% 70%));
+  --fr-shadow-glow: 0 20px 60px -20px hsl(84 90% 66% / 0.35);
+  --fr-shadow-soft: 0 12px 40px -16px hsl(267 50% 8% / 0.5);
+  color-scheme: dark;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.landing-theme h1,
+.landing-theme h2,
+.landing-theme h3,
+.landing-theme h4 {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.landing-theme .font-display {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+.landing-theme.bg-hero,
+.landing-theme .bg-hero {
+  background: var(--fr-gradient-hero);
+}
+
+.landing-theme .bg-lime-gradient {
+  background: var(--fr-gradient-lime);
+}
+
+.landing-theme .bg-pink-gradient {
+  background: var(--fr-gradient-pink);
+}
+
+.landing-theme .shadow-glow {
+  box-shadow: var(--fr-shadow-glow);
+}
+
+.landing-theme .shadow-soft {
+  box-shadow: var(--fr-shadow-soft);
+}
+
+.landing-theme .glass {
+  background: color-mix(in oklab, hsl(var(--fr-surface)) 70%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.landing-theme .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.landing-theme .no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes radar-ping {
+  0% { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.landing-theme .radar-ping {
+  animation: radar-ping 2.6s ease-out infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.landing-theme .float-y {
+  animation: float-y 4s ease-in-out infinite;
+}
+
 @layer utilities {
   .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 }

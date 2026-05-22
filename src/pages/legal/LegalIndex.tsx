@@ -26,7 +26,7 @@ const LegalIndex = () => (
       </h1>
       <p className="mt-7 text-[16px] md:text-[18px] text-ink-soft leading-[1.7] max-w-2xl">
         Здесь собраны реквизиты оператора, условия использования Frendly, политика обработки персональных данных,
-        согласия, правила сервиса и условия для партнёров.
+        согласие на обработку персональных данных и контакты поддержки.
       </p>
 
       <div className="mt-12 border-y border-hairline divide-y divide-hairline">

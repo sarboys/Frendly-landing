@@ -787,7 +787,7 @@ const Partners = () => {
           <div className="pt-8 flex flex-wrap justify-between items-center gap-3 text-[11px] text-ink-mute tracking-wide">
             <p>© MMXXVI Frendly. Все права защищены.</p>
             <div className="flex flex-wrap gap-x-7 gap-y-3">
-              <Link to="/legal/partners" className="lux-link hover:text-foreground">Условия партнёрства</Link>
+              <Link to="/legal/terms" className="lux-link hover:text-foreground">Условия</Link>
               <Link to="/legal/privacy" className="lux-link hover:text-foreground">Приватность</Link>
               <Link to="/legal" className="lux-link hover:text-foreground">Реквизиты</Link>
               <a href="mailto:team@frendly.tech" className="lux-link hover:text-foreground">team@frendly.tech</a>
