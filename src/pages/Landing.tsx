@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import type { ComponentType } from "react";
 import {
   Sparkles, MapPin, Users, MessageCircle, Shield, Moon, Wand2,
   ArrowRight, Play, Apple, Star, Check, ChevronDown, Heart, Wine,
@@ -11,6 +12,9 @@ import { Logo, LogoMark } from "@/components/Logo";
 const IOS_STORE_URL = import.meta.env.VITE_IOS_STORE_URL ?? "/";
 const ANDROID_STORE_URL = import.meta.env.VITE_ANDROID_STORE_URL ?? "/";
 const DEFAULT_STORE_URL = import.meta.env.VITE_DEFAULT_STORE_URL ?? "/";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "") ??
+  "https://api.frendly.tech";
 
 const CITIES = ["Москва", "Санкт-Петербург", "Тбилиси", "Алматы", "Белград", "Лиссабон", "Берлин", "Стамбул", "Ереван", "Дубай"];
 
@@ -37,11 +41,12 @@ const STEPS = [
   { n: "04", t: "Живи вечер", d: "Live-таймлайн, чек-ин, голосовые. После — AfterParty с фото и контактами." },
 ];
 
-const EVENTS = [
-  { i: Wine, t: "Винный вечер", w: "Сегодня · 19:30", p: "Patriarshy", g: "from-rose-500/30 to-amber-500/20" },
-  { i: Dices, t: "Настолки", w: "Сегодня · 20:00", p: "Hitzel", g: "from-violet-500/30 to-fuchsia-500/20" },
-  { i: Film, t: "Кинопоказ", w: "Завтра · 21:00", p: "Garage", g: "from-indigo-500/30 to-cyan-500/20" },
-  { i: Sunrise, t: "Утренний забег", w: "Сб · 08:00", p: "Парк Горького", g: "from-emerald-500/30 to-lime-500/20" },
+const EVENT_GRADIENTS = [
+  "from-rose-500/30 to-amber-500/20",
+  "from-violet-500/30 to-fuchsia-500/20",
+  "from-indigo-500/30 to-cyan-500/20",
+  "from-emerald-500/30 to-lime-500/20",
+  "from-sky-500/30 to-pink-500/20",
 ];
 
 const DARK_CODE = [
@@ -64,13 +69,167 @@ const FAQ = [
   { q: "Где сейчас работает?", a: "Запускаемся в Москве и Петербурге, дальше — Тбилиси, Алматы, Белград, Лиссабон." },
 ];
 
+type MediaVariant = {
+  url: string | null;
+  downloadUrl: string | null;
+};
+
+type AfficheEvent = {
+  id: string;
+  title: string;
+  description: string | null;
+  city: string;
+  venue: string | null;
+  address: string | null;
+  startsAt: string | null;
+  dateLabel: string | null;
+  timeLabel: string | null;
+  category: string | null;
+  priceFrom: number | null;
+  priceMode: "free" | "paid" | "unknown";
+  currency: string | null;
+  imageUrl: string | null;
+  imageVariants: Record<string, MediaVariant>;
+  actionUrl: string | null;
+  tags: string[];
+};
+
+type AfficheEventListResponse = {
+  items?: AfficheEvent[];
+};
+
+function toAssetUrl(value: string | null | undefined) {
+  if (!value) {
+    return null;
+  }
+  if (/^(https?:|data:)/i.test(value)) {
+    return value;
+  }
+  return `${API_BASE_URL}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
+function getEventImage(event: AfficheEvent) {
+  return toAssetUrl(
+    event.imageVariants.card?.downloadUrl ??
+      event.imageVariants.card?.url ??
+      event.imageVariants.hero?.downloadUrl ??
+      event.imageVariants.hero?.url ??
+      event.imageUrl,
+  );
+}
+
+function getEventIcon(event: AfficheEvent): ComponentType<{ className?: string }> {
+  const text = `${event.category ?? ""} ${event.title} ${event.tags.join(" ")}`.toLowerCase();
+  if (text.includes("кино") || text.includes("film") || text.includes("театр")) {
+    return Film;
+  }
+  if (text.includes("концерт") || text.includes("music") || text.includes("standup") || text.includes("стендап")) {
+    return Music2;
+  }
+  if (text.includes("вино") || text.includes("бар") || text.includes("ужин")) {
+    return Wine;
+  }
+  if (text.includes("игр") || text.includes("настол")) {
+    return Dices;
+  }
+  if (text.includes("завтрак") || text.includes("утрен")) {
+    return Sunrise;
+  }
+  if (text.includes("кофе")) {
+    return Coffee;
+  }
+  return CalendarPlus;
+}
+
+function getEventDate(event: AfficheEvent) {
+  if (event.dateLabel || event.timeLabel) {
+    return [event.dateLabel, event.timeLabel].filter(Boolean).join(" · ");
+  }
+  if (!event.startsAt) {
+    return "Скоро";
+  }
+  return new Intl.DateTimeFormat("ru-RU", {
+    timeZone: "Europe/Moscow",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(event.startsAt));
+}
+
+function getEventPlace(event: AfficheEvent) {
+  return event.venue ?? event.address ?? event.city ?? "Москва";
+}
+
+function getEventPrice(event: AfficheEvent) {
+  if (event.priceMode === "free") {
+    return "Бесплатно";
+  }
+  if (event.priceFrom != null) {
+    return `от ${event.priceFrom.toLocaleString("ru-RU")} ₽`;
+  }
+  return "Билеты";
+}
+
+function getEventHref(event: AfficheEvent) {
+  return event.actionUrl ?? DEFAULT_STORE_URL;
+}
+
+function isExternalHref(value: string) {
+  return /^https?:\/\//i.test(value);
+}
+
+function sortUpcomingEvents(items: AfficheEvent[]) {
+  return [...items].sort((a, b) => {
+    const aTime = a.startsAt ? new Date(a.startsAt).getTime() : Number.POSITIVE_INFINITY;
+    const bTime = b.startsAt ? new Date(b.startsAt).getTime() : Number.POSITIVE_INFINITY;
+    return aTime - bTime;
+  });
+}
+
 export default function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [voiceIdx, setVoiceIdx] = useState(0);
+  const [evenings, setEvenings] = useState<AfficheEvent[]>([]);
+  const [eveningsLoading, setEveningsLoading] = useState(true);
 
   useEffect(() => {
     const t = setInterval(() => setVoiceIdx((i) => (i + 1) % VOICES.length), 5000);
     return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ city: "Москва", limit: "50" });
+
+    setEveningsLoading(true);
+    fetch(`${API_BASE_URL}/affiche/events?${params.toString()}`, {
+      signal: controller.signal,
+      headers: { Accept: "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Affiche request failed: ${response.status}`);
+        }
+        return response.json() as Promise<AfficheEventListResponse>;
+      })
+      .then((data) => {
+        const items = Array.isArray(data.items) ? sortUpcomingEvents(data.items) : [];
+        setEvenings(items.slice(0, 5));
+      })
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") {
+          return;
+        }
+        setEvenings([]);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setEveningsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
   }, []);
 
   return (
@@ -261,25 +420,83 @@ export default function Landing() {
             сегодня вечером.
           </h2>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {EVENTS.map((e, i) => (
-              <div key={i} className="group relative rounded-3xl overflow-hidden border border-white/10 aspect-[3/4] flex flex-col justify-between p-5 hover:-translate-y-1 transition duration-300">
-                <div className={`absolute inset-0 bg-gradient-to-br ${e.g}`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="relative flex items-center justify-between text-xs">
-                  <span className="rounded-full glass border border-white/20 px-2.5 py-1">N° 0{i+1}</span>
-                  <span className="rounded-full bg-lime text-lime-foreground px-2.5 py-1 font-semibold">Сегодня</span>
-                </div>
-                <div className="relative">
-                  <e.i className="size-10 mb-3 opacity-90" />
-                  <h3 className="font-display text-2xl font-semibold leading-tight">{e.t}</h3>
-                  <p className="text-xs text-muted-foreground mt-1.5">{e.w} · {e.p}</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold">
-                    Войти <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {eveningsLoading &&
+              Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="relative rounded-3xl overflow-hidden border border-white/10 aspect-[3/4] p-5">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${EVENT_GRADIENTS[i]}`} />
+                  <div className="absolute inset-0 bg-black/20 animate-pulse" />
+                  <div className="relative h-full flex flex-col justify-between">
+                    <div className="flex items-center justify-between">
+                      <div className="h-7 w-16 rounded-full bg-white/15" />
+                      <div className="h-7 w-20 rounded-full bg-white/15" />
+                    </div>
+                    <div>
+                      <div className="h-10 w-10 rounded-2xl bg-white/15 mb-3" />
+                      <div className="h-7 w-4/5 rounded bg-white/15" />
+                      <div className="mt-2 h-4 w-2/3 rounded bg-white/10" />
+                    </div>
                   </div>
                 </div>
+              ))}
+
+            {!eveningsLoading &&
+              evenings.map((event, i) => {
+                const Icon = getEventIcon(event);
+                const imageUrl = getEventImage(event);
+                const href = getEventHref(event);
+                const external = isExternalHref(href);
+
+                return (
+                  <a
+                    key={event.id}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noreferrer" : undefined}
+                    className="group relative rounded-3xl overflow-hidden border border-white/10 aspect-[3/4] flex flex-col justify-between p-5 hover:-translate-y-1 transition duration-300"
+                  >
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className={`absolute inset-0 bg-gradient-to-br ${EVENT_GRADIENTS[i % EVENT_GRADIENTS.length]}`} />
+                    )}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${EVENT_GRADIENTS[i % EVENT_GRADIENTS.length]} opacity-40`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/20" />
+                    <div className="relative flex items-center justify-between gap-2 text-xs">
+                      <span className="rounded-full glass border border-white/20 px-2.5 py-1">N° 0{i + 1}</span>
+                      <span className="rounded-full bg-lime text-lime-foreground px-2.5 py-1 font-semibold whitespace-nowrap">{getEventPrice(event)}</span>
+                    </div>
+                    <div className="relative">
+                      <Icon className="size-10 mb-3 opacity-90" />
+                      <h3 className="font-display text-xl lg:text-2xl font-semibold leading-tight line-clamp-3">{event.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2">
+                        {getEventDate(event)} · {getEventPlace(event)}
+                      </p>
+                      <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold">
+                        Смотреть <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+
+            {!eveningsLoading && evenings.length === 0 && (
+              <div className="sm:col-span-2 lg:col-span-5 rounded-3xl glass border border-white/10 p-8">
+                <CalendarPlus className="size-8 text-lime" />
+                <h3 className="mt-4 font-display text-2xl font-semibold">Ближайшие вечера пока не загрузились</h3>
+                <p className="mt-2 text-sm text-muted-foreground max-w-xl">
+                  Открой Frendly, там можно собрать свой вечер в Москве за пару минут.
+                </p>
+                <a href={DEFAULT_STORE_URL} className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-lime-gradient text-lime-foreground font-bold px-5 py-3">
+                  Открыть Frendly <ArrowRight className="size-4" />
+                </a>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
