@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { ArrowLeft, Mail, MapPin } from "lucide-react";
-import iconV5 from "@/assets/icon-v5-sage.png";
+import { Logo } from "@/components/Logo";
 import { companyDetails, legalDocuments } from "./legalContent";
 
 type LegalLayoutProps = {
@@ -13,9 +13,8 @@ export const LegalLayout = ({ children }: LegalLayoutProps) => (
 
     <nav className="sticky top-0 z-40 backdrop-blur-xl bg-paper/85 border-b border-hairline/60">
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <img src={iconV5} alt="Frendly" className="w-8 h-8 rounded-[28%] transition-transform group-hover:rotate-3" />
-          <span className="font-serif text-[20px] tracking-tight">Frendly</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <Logo size="sm" tone="dark" />
           <span className="hidden md:inline-block ml-3 lux-eyebrow text-[9px]">Legal</span>
         </Link>
         <Link

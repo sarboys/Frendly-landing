@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BadgeCheck, ChevronLeft, Clock3, Loader2, ShieldAlert } from "lucide-react";
-import iconV5 from "@/assets/icon-v5-sage.png";
+import { Logo } from "@/components/Logo";
 
 type OfferCodeActivationStatus =
   | "activated"
@@ -129,8 +129,7 @@ const OfferCodePage = () => {
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-3xl flex-col">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={iconV5} alt="" className="h-10 w-10 rounded-[8px]" />
-            <span className="text-sm font-bold">Frendly</span>
+            <Logo size="sm" tone="dark" />
           </Link>
           <Link
             to="/"

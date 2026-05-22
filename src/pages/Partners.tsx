@@ -22,7 +22,7 @@ import {
   ChevronRight,
   PartyPopper,
 } from "lucide-react";
-import iconV5 from "@/assets/icon-v5-sage.png";
+import { Logo } from "@/components/Logo";
 import eventWine from "@/assets/event-wine.jpg";
 import eventBoard from "@/assets/event-boardgames.jpg";
 import eventCinema from "@/assets/event-cinema.jpg";
@@ -145,9 +145,8 @@ const Partners = () => {
       {/* NAV */}
       <nav className="sticky top-0 z-40 backdrop-blur-xl bg-paper/80 border-b border-hairline/60">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <img src={iconV5} alt="Frendly" className="w-8 h-8 rounded-[28%] transition-transform group-hover:rotate-3" />
-            <span className="font-serif text-[20px] tracking-tight">Frendly</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <Logo size="sm" tone="dark" />
             <span className="hidden md:inline-block ml-3 lux-eyebrow text-[9px]">Partners · Vol. I</span>
           </Link>
           <div className="hidden lg:flex items-center gap-8 text-[13px] text-ink-soft tracking-wide">
@@ -756,8 +755,8 @@ const Partners = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-hairline">
             <div className="md:col-span-5">
               <div className="flex items-center gap-3 mb-5">
-                <img src={iconV5} alt="Frendly" className="w-9 h-9 rounded-[28%]" />
-                <span className="font-serif font-light text-[22px] tracking-tight">Frendly · Partners</span>
+                <Logo size="sm" tone="dark" />
+                <span className="font-serif font-light text-[22px] tracking-tight">Partners</span>
               </div>
               <p className="font-serif font-light text-[20px] md:text-[24px] leading-[1.3] text-foreground/85 max-w-md tracking-tight">
                 «Платформа для заведений, которые растут вместе с городом.»

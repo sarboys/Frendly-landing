@@ -9,7 +9,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import iconV5 from "@/assets/icon-v5-sage.png";
+import { Logo } from "@/components/Logo";
 
 type PublicSharePerson = {
   name: string;
@@ -224,8 +224,7 @@ const PublicSharePage = () => {
         <div>
           <nav className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3">
-              <img src={iconV5} alt="" className="h-10 w-10 rounded-2xl" />
-              <span className="text-sm font-bold tracking-wide">Frendly</span>
+              <Logo size="sm" tone="dark" />
             </Link>
             <span className="rounded-full bg-primary-soft px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">
               {share.kind === "event" ? "Встреча" : "Маршрут"}
