@@ -69,33 +69,26 @@ const FAQ = [
   { q: "Где сейчас работает?", a: "Запускаемся в Москве и Петербурге, дальше — Тбилиси, Алматы, Белград, Лиссабон." },
 ];
 
-type MediaVariant = {
-  url: string | null;
-  downloadUrl: string | null;
-};
-
-type AfficheEvent = {
+type ActiveMeetup = {
   id: string;
   title: string;
-  description: string | null;
-  city: string;
-  venue: string | null;
-  address: string | null;
-  startsAt: string | null;
-  dateLabel: string | null;
-  timeLabel: string | null;
-  category: string | null;
-  priceFrom: number | null;
-  priceMode: "free" | "paid" | "unknown";
-  currency: string | null;
+  emoji: string;
+  startsAt: string;
+  time: string;
+  place: string;
+  going: number;
+  capacity: number;
+  vibe: string;
+  priceMode: "free" | "fixed" | "from" | "upto" | "range" | "split" | "host_pays" | "fifty_fifty";
+  priceAmountFrom: number | null;
+  priceAmountTo: number | null;
   imageUrl: string | null;
-  imageVariants: Record<string, MediaVariant>;
-  actionUrl: string | null;
-  tags: string[];
+  routePointCount: number | null;
+  isDate: boolean;
 };
 
-type AfficheEventListResponse = {
-  items?: AfficheEvent[];
+type ActiveMeetupListResponse = {
+  items?: ActiveMeetup[];
 };
 
 function toAssetUrl(value: string | null | undefined) {
@@ -108,18 +101,12 @@ function toAssetUrl(value: string | null | undefined) {
   return `${API_BASE_URL}${value.startsWith("/") ? value : `/${value}`}`;
 }
 
-function getEventImage(event: AfficheEvent) {
-  return toAssetUrl(
-    event.imageVariants.card?.downloadUrl ??
-      event.imageVariants.card?.url ??
-      event.imageVariants.hero?.downloadUrl ??
-      event.imageVariants.hero?.url ??
-      event.imageUrl,
-  );
+function getMeetupImage(meetup: ActiveMeetup) {
+  return toAssetUrl(meetup.imageUrl);
 }
 
-function getEventIcon(event: AfficheEvent): ComponentType<{ className?: string }> {
-  const text = `${event.category ?? ""} ${event.title} ${event.tags.join(" ")}`.toLowerCase();
+function getMeetupIcon(meetup: ActiveMeetup): ComponentType<{ className?: string }> {
+  const text = `${meetup.emoji} ${meetup.title} ${meetup.vibe} ${meetup.place}`.toLowerCase();
   if (text.includes("кино") || text.includes("film") || text.includes("театр")) {
     return Film;
   }
@@ -141,48 +128,46 @@ function getEventIcon(event: AfficheEvent): ComponentType<{ className?: string }
   return CalendarPlus;
 }
 
-function getEventDate(event: AfficheEvent) {
-  if (event.dateLabel || event.timeLabel) {
-    return [event.dateLabel, event.timeLabel].filter(Boolean).join(" · ");
-  }
-  if (!event.startsAt) {
-    return "Скоро";
-  }
+function getMeetupDate(meetup: ActiveMeetup) {
   return new Intl.DateTimeFormat("ru-RU", {
     timeZone: "Europe/Moscow",
     day: "numeric",
     month: "short",
     hour: "2-digit",
     minute: "2-digit",
-  }).format(new Date(event.startsAt));
+  }).format(new Date(meetup.startsAt));
 }
 
-function getEventPlace(event: AfficheEvent) {
-  return event.venue ?? event.address ?? event.city ?? "Москва";
+function getMeetupPlace(meetup: ActiveMeetup) {
+  return meetup.place || "Москва";
 }
 
-function getEventPrice(event: AfficheEvent) {
-  if (event.priceMode === "free") {
+function getMeetupPrice(meetup: ActiveMeetup) {
+  if (meetup.priceMode === "free") {
     return "Бесплатно";
   }
-  if (event.priceFrom != null) {
-    return `от ${event.priceFrom.toLocaleString("ru-RU")} ₽`;
+  if (meetup.priceMode === "host_pays") {
+    return "Хост платит";
   }
-  return "Билеты";
+  if (meetup.priceMode === "fifty_fifty") {
+    return "50/50";
+  }
+  if (meetup.priceAmountFrom != null && meetup.priceAmountTo != null) {
+    return `${meetup.priceAmountFrom.toLocaleString("ru-RU")}–${meetup.priceAmountTo.toLocaleString("ru-RU")} ₽`;
+  }
+  if (meetup.priceAmountFrom != null) {
+    return `от ${meetup.priceAmountFrom.toLocaleString("ru-RU")} ₽`;
+  }
+  if (meetup.priceAmountTo != null) {
+    return `до ${meetup.priceAmountTo.toLocaleString("ru-RU")} ₽`;
+  }
+  return "Встреча";
 }
 
-function getEventHref(event: AfficheEvent) {
-  return event.actionUrl ?? DEFAULT_STORE_URL;
-}
-
-function isExternalHref(value: string) {
-  return /^https?:\/\//i.test(value);
-}
-
-function sortUpcomingEvents(items: AfficheEvent[]) {
+function sortUpcomingMeetups(items: ActiveMeetup[]) {
   return [...items].sort((a, b) => {
-    const aTime = a.startsAt ? new Date(a.startsAt).getTime() : Number.POSITIVE_INFINITY;
-    const bTime = b.startsAt ? new Date(b.startsAt).getTime() : Number.POSITIVE_INFINITY;
+    const aTime = new Date(a.startsAt).getTime();
+    const bTime = new Date(b.startsAt).getTime();
     return aTime - bTime;
   });
 }
@@ -190,7 +175,7 @@ function sortUpcomingEvents(items: AfficheEvent[]) {
 export default function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [voiceIdx, setVoiceIdx] = useState(0);
-  const [evenings, setEvenings] = useState<AfficheEvent[]>([]);
+  const [evenings, setEvenings] = useState<ActiveMeetup[]>([]);
   const [eveningsLoading, setEveningsLoading] = useState(true);
 
   useEffect(() => {
@@ -200,21 +185,21 @@ export default function Landing() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const params = new URLSearchParams({ city: "Москва", limit: "50" });
+    const params = new URLSearchParams({ city: "Москва", limit: "5" });
 
     setEveningsLoading(true);
-    fetch(`${API_BASE_URL}/affiche/events?${params.toString()}`, {
+    fetch(`${API_BASE_URL}/events/public/active?${params.toString()}`, {
       signal: controller.signal,
       headers: { Accept: "application/json" },
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Affiche request failed: ${response.status}`);
+          throw new Error(`Active meetups request failed: ${response.status}`);
         }
-        return response.json() as Promise<AfficheEventListResponse>;
+        return response.json() as Promise<ActiveMeetupListResponse>;
       })
       .then((data) => {
-        const items = Array.isArray(data.items) ? sortUpcomingEvents(data.items) : [];
+        const items = Array.isArray(data.items) ? sortUpcomingMeetups(data.items) : [];
         setEvenings(items.slice(0, 5));
       })
       .catch((error: unknown) => {
@@ -441,18 +426,14 @@ export default function Landing() {
               ))}
 
             {!eveningsLoading &&
-              evenings.map((event, i) => {
-                const Icon = getEventIcon(event);
-                const imageUrl = getEventImage(event);
-                const href = getEventHref(event);
-                const external = isExternalHref(href);
+              evenings.map((meetup, i) => {
+                const Icon = getMeetupIcon(meetup);
+                const imageUrl = getMeetupImage(meetup);
 
                 return (
                   <a
-                    key={event.id}
-                    href={href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noreferrer" : undefined}
+                    key={meetup.id}
+                    href={DEFAULT_STORE_URL}
                     className="group relative rounded-3xl overflow-hidden border border-white/10 aspect-[3/4] flex flex-col justify-between p-5 hover:-translate-y-1 transition duration-300"
                   >
                     {imageUrl ? (
@@ -469,16 +450,20 @@ export default function Landing() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/20" />
                     <div className="relative flex items-center justify-between gap-2 text-xs">
                       <span className="rounded-full glass border border-white/20 px-2.5 py-1">N° 0{i + 1}</span>
-                      <span className="rounded-full bg-lime text-lime-foreground px-2.5 py-1 font-semibold whitespace-nowrap">{getEventPrice(event)}</span>
+                      <span className="rounded-full bg-lime text-lime-foreground px-2.5 py-1 font-semibold whitespace-nowrap">{getMeetupPrice(meetup)}</span>
                     </div>
                     <div className="relative">
                       <Icon className="size-10 mb-3 opacity-90" />
-                      <h3 className="font-display text-xl lg:text-2xl font-semibold leading-tight line-clamp-3">{event.title}</h3>
+                      <h3 className="font-display text-xl lg:text-2xl font-semibold leading-tight line-clamp-3">{meetup.title}</h3>
                       <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2">
-                        {getEventDate(event)} · {getEventPlace(event)}
+                        {getMeetupDate(meetup)} · {getMeetupPlace(meetup)}
+                      </p>
+                      <p className="mt-2 text-xs text-foreground/80">
+                        {meetup.going}/{meetup.capacity} идут
+                        {meetup.routePointCount ? ` · ${meetup.routePointCount} точки` : ""}
                       </p>
                       <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold">
-                        Смотреть <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
+                        Открыть <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
                       </div>
                     </div>
                   </a>
@@ -488,9 +473,9 @@ export default function Landing() {
             {!eveningsLoading && evenings.length === 0 && (
               <div className="sm:col-span-2 lg:col-span-5 rounded-3xl glass border border-white/10 p-8">
                 <CalendarPlus className="size-8 text-lime" />
-                <h3 className="mt-4 font-display text-2xl font-semibold">Ближайшие вечера пока не загрузились</h3>
+                <h3 className="mt-4 font-display text-2xl font-semibold">Активных встреч в Москве пока нет</h3>
                 <p className="mt-2 text-sm text-muted-foreground max-w-xl">
-                  Открой Frendly, там можно собрать свой вечер в Москве за пару минут.
+                  Это нормально. Открой Frendly, там можно собрать свою встречу в Москве за пару минут.
                 </p>
                 <a href={DEFAULT_STORE_URL} className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-lime-gradient text-lime-foreground font-bold px-5 py-3">
                   Открыть Frendly <ArrowRight className="size-4" />
