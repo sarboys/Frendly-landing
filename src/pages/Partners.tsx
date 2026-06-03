@@ -73,30 +73,6 @@ const Reveal = ({
   );
 };
 
-const Counter = ({ to, suffix = "", duration = 1400 }: { to: number; suffix?: string; duration?: number }) => {
-  const { ref, v } = useReveal<HTMLSpanElement>();
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!v) return;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(Math.round(to * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [v, to, duration]);
-  return (
-    <span ref={ref}>
-      {val.toLocaleString("ru-RU")}
-      {suffix}
-    </span>
-  );
-};
-
 /* ---------- data ---------- */
 
 const opportunities = [
@@ -116,14 +92,14 @@ const flow = [
 ];
 
 const cases = [
-  { name: "Bar Strelka", type: "Винный бар · Москва", img: eventWine, metric: "+38%", metricLabel: "выручки в будни", quote: "Frendly закрыл нам понедельники и вторники. Теперь это лучшие дни недели.", author: "Артём, управляющий" },
-  { name: "Hitzel", type: "Игротека · Санкт-Петербург", img: eventBoard, metric: "×2.4", metricLabel: "новых гостей в месяц", quote: "Через перк «бесплатная партия для компании 4+» к нам пришло 600 новых лиц за 8 недель.", author: "Катя, основатель" },
-  { name: "Garage Cinema", type: "Кинопоказы · Москва", img: eventCinema, metric: "92%", metricLabel: "заполняемость залов", quote: "Перестали покупать рекламу. Френды сами собирают компании и выкупают сеансы.", author: "Денис, программный директор" },
+  { name: "Винный бар", type: "Пример формата · Москва", img: eventWine, metric: "4–8", metricLabel: "гостей в группе", quote: "Перк можно описать заранее: дата, лимит, депозит, возраст и правила бронирования.", author: "Сценарий партнёра" },
+  { name: "Игротека", type: "Пример формата · Санкт-Петербург", img: eventBoard, metric: "18+", metricLabel: "возрастной порог", quote: "Предложение показывается только с понятными условиями и без скрытых платежей.", author: "Сценарий партнёра" },
+  { name: "Кинопоказы", type: "Пример формата · Москва", img: eventCinema, metric: "1", metricLabel: "пилотная заявка", quote: "До договора заявка не обязывает стороны запускать кампанию или размещение.", author: "Сценарий партнёра" },
 ];
 
 const tariffs = [
-  { name: "Старт", price: "0 ₽", sub: "Бесплатно навсегда", desc: "Чтобы попробовать и оценить поток.", features: ["Карточка заведения", "До 2 акций / перков", "1 событие в месяц", "Базовая аналитика", "Появление в ленте по геолокации"], cta: "Начать бесплатно", accent: false },
-  { name: "Партнёр", price: "9 900 ₽", sub: "в месяц", desc: "Для активных мест и регулярных событий.", features: ["Безлимит акций и перков", "Безлимит событий", "Приоритет в AI-маршрутах", "Push-кампании по интересам", "Расширенная аналитика и когорты", "Менеджер поддержки"], cta: "Стать партнёром", accent: true, badge: "Editor's choice" },
+  { name: "Старт", price: "0 ₽", sub: "пилот без оплаты", desc: "Чтобы попробовать формат до договора.", features: ["Карточка заведения", "До 2 акций / перков", "1 событие в месяц", "Базовая аналитика", "Появление в ленте по геолокации"], cta: "Начать пилот", accent: false },
+  { name: "Партнёр", price: "По договору", sub: "после пилота", desc: "Для активных мест и регулярных событий.", features: ["Расширенные лимиты акций и перков", "Регулярные события", "Приоритет в AI-маршрутах", "Push-кампании по согласию пользователя", "Расширенная аналитика и когорты", "Менеджер поддержки"], cta: "Стать партнёром", accent: true, badge: "Рекомендуем" },
   { name: "Сеть", price: "Договорная", sub: "от 5 локаций", desc: "Для сетей, фестивалей и крупных площадок.", features: ["Всё из «Партнёр»", "Мультилокационный кабинет", "Интеграция с CRM / iiko / Poster", "Брендированные коллекции", "Совместные кампании", "API и выгрузки"], cta: "Поговорить", accent: false },
 ];
 
@@ -184,9 +160,9 @@ const Partners = () => {
           <div className="flex items-center justify-between gap-4 pb-5">
             <span className="lux-eyebrow">N° 02 · Frendly for Business</span>
             <div className="hidden sm:flex items-center gap-3 lux-eyebrow text-[10px]">
-              <span>Apr · MMXXVI</span>
+              <span>MMXXVI</span>
               <span className="lux-divider-dot inline-block" />
-              <span>240+ заведений · 12 400+ френдов</span>
+              <span>Пилотные партнёры · гости 18+</span>
             </div>
           </div>
           <div className="lux-rule" />
@@ -202,14 +178,14 @@ const Partners = () => {
             <h1 className="lux-h1 text-[48px] min-[390px]:text-[56px] sm:text-[84px] md:text-[112px] tracking-[-0.04em]">
               Город,
               <br /> который
-              <br /> приходит <span className="lux-h1-italic text-secondary">сам</span>.
+              <br /> выбирает <span className="lux-h1-italic text-secondary">вечер</span>.
             </h1>
 
             <div className="mt-8 flex items-start gap-5 max-w-xl">
               <div className="w-10 lux-rule mt-3 shrink-0" />
               <p className="text-[16px] md:text-[17px] text-ink-soft leading-[1.6] font-light">
-                Подключи заведение к Frendly — и пусть тысячи френдов сегодня вечером
-                <em className="font-serif font-light text-foreground"> соберут компанию</em> и придут к тебе.
+                Подключи заведение к Frendly, чтобы гости могли
+                <em className="font-serif font-light text-foreground"> собрать компанию</em> и увидеть понятные условия визита.
               </p>
             </div>
 
@@ -225,18 +201,18 @@ const Partners = () => {
                 href="#cases"
                 className="inline-flex items-center gap-2.5 h-12 px-6 rounded-full bg-paper border border-foreground/15 text-[12px] font-semibold tracking-[0.16em] uppercase tap-fade hover:border-foreground/40 transition-colors"
               >
-                Посмотреть кейсы
+                Посмотреть примеры
               </a>
             </div>
 
             <div className="mt-12 grid grid-cols-2 max-w-md gap-x-10">
               <div>
-                <p className="lux-num text-[42px] leading-none">240<span className="text-primary text-[24px] align-top ml-1">+</span></p>
-                <p className="lux-eyebrow text-[10px] mt-2">заведений на платформе</p>
+                <p className="lux-num text-[42px] leading-none">18<span className="text-primary text-[24px] align-top ml-1">+</span></p>
+                <p className="lux-eyebrow text-[10px] mt-2">возрастной порог гостей</p>
               </div>
               <div className="border-l border-hairline pl-6">
-                <p className="lux-num text-[42px] leading-none">12 400<span className="text-primary text-[24px] align-top ml-1">+</span></p>
-                <p className="lux-eyebrow text-[10px] mt-2">активных френдов</p>
+                <p className="lux-num text-[42px] leading-none">0<span className="text-primary text-[24px] align-top ml-1">₽</span></p>
+                <p className="lux-eyebrow text-[10px] mt-2">обязательств до договора</p>
               </div>
             </div>
           </div>
@@ -328,10 +304,10 @@ const Partners = () => {
       <section className="border-y border-hairline">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
           {[
-            { v: <Counter to={240} />, suf: "+", l: "заведений-партнёров" },
-            { v: <Counter to={1800} />, suf: "+", l: "вечеров в месяц" },
-            { v: <Counter to={62} />, suf: "%", l: "возвращаются повторно" },
-            { v: <span>×<Counter to={3} />,4</span>, suf: "", l: "ROI vs таргет" },
+            { v: <span>18</span>, suf: "+", l: "только совершеннолетние гости" },
+            { v: <span>4–8</span>, suf: "", l: "людей в камерной группе" },
+            { v: <span>1</span>, suf: "", l: "заявка на пилот" },
+            { v: <span>0</span>, suf: "₽", l: "обязательств до договора" },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 80} className="relative px-6 md:px-8">
               {i > 0 && <span className="hidden md:block absolute left-0 top-2 bottom-2 w-px bg-hairline" />}
@@ -796,7 +772,9 @@ const Partners = () => {
             <div className="flex flex-wrap gap-x-7 gap-y-3">
               <Link to="/legal/terms" className="lux-link hover:text-foreground">Условия</Link>
               <Link to="/legal/partner-terms" className="lux-link hover:text-foreground">Партнёрам</Link>
+              <Link to="/legal/community-rules" className="lux-link hover:text-foreground">Правила</Link>
               <Link to="/legal/offer" className="lux-link hover:text-foreground">Оферта</Link>
+              <Link to="/legal/account-deletion" className="lux-link hover:text-foreground">Удаление</Link>
               <Link to="/legal/privacy" className="lux-link hover:text-foreground">Приватность</Link>
               <Link to="/legal/cookies" className="lux-link hover:text-foreground">Cookies</Link>
               <Link to="/legal" className="lux-link hover:text-foreground">Реквизиты</Link>

@@ -19,10 +19,10 @@ const API_BASE_URL =
 const CITIES = ["Москва", "Санкт-Петербург", "Тбилиси", "Алматы", "Белград", "Лиссабон", "Берлин", "Стамбул", "Ереван", "Дубай"];
 
 const STATS = [
-  { v: "12 400+", l: "активных френдов" },
-  { v: "1 800+", l: "вечеров в месяц" },
-  { v: "4.8★", l: "рейтинг в сторах" },
-  { v: "92%", l: "идут на 2-ю встречу" },
+  { v: "18+", l: "возрастной порог" },
+  { v: "4–8", l: "людей в камерной группе" },
+  { v: "1 tap", l: "жалоба или блокировка" },
+  { v: "2", l: "пилотных города" },
 ];
 
 const FEATURES = [
@@ -57,9 +57,9 @@ const DARK_CODE = [
 ];
 
 const VOICES = [
-  { q: "За месяц 4 вечера и 2 настоящих друга. Это не Tinder — это про живых людей.", a: "Аня, 27" },
-  { q: "AI-маршрут собрал идеальный вечер пятницы за 30 секунд. Я даже забыл про Google Maps.", a: "Марк, 31" },
-  { q: "Чувствую себя в безопасности: SOS, верификация, маленькие группы. Мама довольна 😅", a: "Лиза, 24" },
+  { q: "Собрать камерный вечер, выбрать район и увидеть людей, которые уже идут.", a: "Сценарий: встреча" },
+  { q: "Получить маршрут из нескольких мест, а потом открыть чат участников.", a: "Сценарий: маршрут" },
+  { q: "Пожаловаться, заблокировать пользователя и уйти из встречи, если что-то не так.", a: "Сценарий: безопасность" },
 ];
 
 const FAQ = [
@@ -301,7 +301,7 @@ export default function Landing() {
                          style={{background: `linear-gradient(135deg, oklch(${0.7 + i*0.05} 0.18 ${i*80}), oklch(0.5 0.2 ${i*120}))`}} />
                   ))}
                 </div>
-                <div className="text-sm"><span className="font-bold">12 400</span> <span className="text-muted-foreground">френдов уже собирают вечера</span></div>
+                <div className="text-sm"><span className="font-bold">18+</span> <span className="text-muted-foreground">только совершеннолетние пользователи</span></div>
               </div>
             </div>
 
@@ -506,7 +506,7 @@ export default function Landing() {
                   ночью.
                 </h2>
                 <p className="mt-5 text-muted-foreground max-w-md">
-                  Закрытый режим: kink-friendly события, swing-вечера, приватные клубы и ночные афтепати. Только верифицированные френды, NDA, кодекс согласия.
+                  Закрытый режим для ночных событий, приватных клубных вечеров и камерных афтепати. Только 18+, верификация, правила приватности и кодекс согласия.
                 </p>
                 <a href={DEFAULT_STORE_URL} className="mt-7 inline-flex items-center gap-2 rounded-2xl bg-pink-gradient text-pink-foreground font-bold px-6 py-4 shadow-glow hover:scale-[1.02] transition">
                   <Lock className="size-4" /> Открыть After Dark
@@ -531,10 +531,11 @@ export default function Landing() {
       {/* VOICES */}
       <section className="relative z-10 py-20">
         <div className="mx-auto max-w-5xl px-5 lg:px-10 text-center">
-          <Chapter no="V" label="Голоса" center />
+          <Chapter no="V" label="Сценарии" center />
           <h2 className="font-display text-4xl lg:text-6xl font-semibold leading-[1.05] tracking-[-0.03em]">
-            Тёплые отзывы —{" "}
-            <span className="italic font-light" style={{ fontFamily: '"Instrument Serif", serif', color: "oklch(0.92 0.2 130)" }}>как тёплые вечера</span>.
+            Как это{" "}
+            <span className="italic font-light" style={{ fontFamily: '"Instrument Serif", serif', color: "oklch(0.92 0.2 130)" }}>выглядит</span>{" "}
+            в приложении.
           </h2>
 
           <div className="mt-12 relative h-[280px] sm:h-[220px]">
@@ -580,11 +581,10 @@ export default function Landing() {
             <PriceCard
               name="Frendly+"
               tagline="Полный город в кармане"
-              price="490₽"
-              suffix="/ мес"
-              note="Первая неделя бесплатно"
+              price="По тарифу"
+              note="Пробный период, если доступен в приложении"
               highlight
-              items={["Приватные вечера и закрытые круги", "AI-конструктор Premium с перками", "After Dark · ночные события 18+", "Расширенные фильтры и приоритет", "Без рекламы и лимитов"]}
+              items={["Приватные вечера и закрытые круги", "AI-конструктор Premium с перками", "After Dark · ночные события 18+", "Расширенные фильтры и приоритет", "Меньше рекламы и выше лимиты"]}
             />
           </div>
         </div>
@@ -660,8 +660,11 @@ export default function Landing() {
           <Logo size="sm" />
           <span>© MMXXVI Frendly · Знакомства через вечера</span>
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <Link to="/legal/terms" className="hover:text-foreground">Условия</Link>
+            <Link to="/legal/community-rules" className="hover:text-foreground">Правила</Link>
             <Link to="/legal/offer" className="hover:text-foreground">Оферта</Link>
             <Link to="/legal/payment-and-refund" className="hover:text-foreground">Оплата</Link>
+            <Link to="/legal/account-deletion" className="hover:text-foreground">Удаление</Link>
             <Link to="/legal/privacy" className="hover:text-foreground">ПДн</Link>
             <Link to="/legal/cookies" className="hover:text-foreground">Cookies</Link>
             <Link to="/legal" className="hover:text-foreground">Реквизиты</Link>
@@ -698,7 +701,7 @@ function PriceCard({ name, tagline, price, suffix, note, items, highlight }: {
       : "border-white/10 glass")}>
       {highlight && (
         <div className="absolute -top-3 left-8 rounded-full bg-lime text-lime-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-          Editor's choice
+          Рекомендуем
         </div>
       )}
       <div className="text-sm text-muted-foreground">{tagline}</div>
