@@ -741,6 +741,14 @@ const Partners = () => {
                   <Link to="/legal/personal-data-consent" className="lux-link hover:text-foreground">
                     обработку данных
                   </Link>
+                  ,{" "}
+                  <Link to="/legal/privacy" className="lux-link hover:text-foreground">
+                    политику ПДн
+                  </Link>
+                  {" "}и{" "}
+                  <Link to="/legal/partner-terms" className="lux-link hover:text-foreground">
+                    условия для партнёров
+                  </Link>
                   .
                 </p>
               </form>
@@ -787,7 +795,10 @@ const Partners = () => {
             <p>© MMXXVI Frendly. Все права защищены.</p>
             <div className="flex flex-wrap gap-x-7 gap-y-3">
               <Link to="/legal/terms" className="lux-link hover:text-foreground">Условия</Link>
+              <Link to="/legal/partner-terms" className="lux-link hover:text-foreground">Партнёрам</Link>
+              <Link to="/legal/offer" className="lux-link hover:text-foreground">Оферта</Link>
               <Link to="/legal/privacy" className="lux-link hover:text-foreground">Приватность</Link>
+              <Link to="/legal/cookies" className="lux-link hover:text-foreground">Cookies</Link>
               <Link to="/legal" className="lux-link hover:text-foreground">Реквизиты</Link>
               <a href="mailto:team@frendly.tech" className="lux-link hover:text-foreground">team@frendly.tech</a>
             </div>

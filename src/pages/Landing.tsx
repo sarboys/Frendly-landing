@@ -659,9 +659,12 @@ export default function Landing() {
         <div className="mx-auto max-w-7xl px-5 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <Logo size="sm" />
           <span>© MMXXVI Frendly · Знакомства через вечера</span>
-          <div className="flex gap-4">
-            <Link to="/legal/privacy" className="hover:text-foreground">Приватность</Link>
-            <Link to="/legal/terms" className="hover:text-foreground">Условия</Link>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <Link to="/legal/offer" className="hover:text-foreground">Оферта</Link>
+            <Link to="/legal/payment-and-refund" className="hover:text-foreground">Оплата</Link>
+            <Link to="/legal/privacy" className="hover:text-foreground">ПДн</Link>
+            <Link to="/legal/cookies" className="hover:text-foreground">Cookies</Link>
+            <Link to="/legal" className="hover:text-foreground">Реквизиты</Link>
             <a href="mailto:team@frendly.tech" className="hover:text-foreground">Поддержка</a>
           </div>
         </div>

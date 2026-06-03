@@ -17,7 +17,7 @@ const detailRows = [
 
 const LegalIndex = () => (
   <LegalLayout>
-    <div className="max-w-5xl">
+    <div className="max-w-6xl">
       <div className="inline-flex items-center gap-2 glass border border-white/10 rounded-full px-3 py-1.5 text-xs">
         <span className="size-1.5 rounded-full bg-lime animate-pulse" />
         Публичные документы Frendly
@@ -30,8 +30,8 @@ const LegalIndex = () => (
       </h1>
 
       <p className="mt-7 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-        Здесь собраны реквизиты оператора, условия использования Frendly, политика обработки персональных данных,
-        согласие на обработку персональных данных и контакты поддержки.
+        Здесь собраны реквизиты оператора, условия использования Frendly, оферта, оплата,
+        возвраты, персональные данные, cookies, согласия и контакты поддержки.
       </p>
 
       <div className="mt-10 glass border border-white/10 rounded-[2rem] p-4 md:p-6 shadow-soft">
@@ -56,21 +56,28 @@ const LegalIndex = () => (
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="mt-8 flex items-center justify-between gap-4">
+        <h2 className="font-display text-2xl md:text-3xl font-semibold">Документы</h2>
+        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          {legalDocuments.length} документов
+        </span>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {legalDocuments.map((document) => (
           <Link
             key={document.slug}
             to={`/legal/${document.slug}`}
-            className="group glass border border-white/10 rounded-[2rem] p-5 shadow-soft hover:border-lime/40 hover:-translate-y-1 transition duration-300"
+            className="group glass border border-white/10 rounded-[1.5rem] p-5 shadow-soft hover:border-lime/40 hover:-translate-y-1 transition duration-300"
           >
-            <div className="flex items-start justify-between gap-5">
+            <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   Обновлено · {document.updatedAt}
                 </p>
-                <h2 className="font-display text-xl md:text-2xl leading-tight font-semibold">
+                <h3 className="font-display text-lg md:text-xl leading-tight font-semibold">
                   {document.title}
-                </h2>
+                </h3>
               </div>
               <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white/10 text-muted-foreground group-hover:bg-lime group-hover:text-lime-foreground transition">
                 <ArrowRight className="size-4" />

@@ -42,7 +42,7 @@ export const LegalLayout = ({ children }: LegalLayoutProps) => (
     <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10 pt-10 pb-20 lg:pt-16">
       <div className="mb-10 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
         <span>N° Legal · Frendly</span>
-        <span className="hidden sm:inline">Условия · Приватность · Реквизиты</span>
+        <span className="hidden sm:inline">Условия · Оферта · ПДн · Оплата</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
@@ -52,34 +52,36 @@ export const LegalLayout = ({ children }: LegalLayoutProps) => (
               <p className="px-3 pb-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                 Документы
               </p>
-              <NavLink
-                to="/legal"
-                end
-                className={({ isActive }) =>
-                  `block rounded-2xl px-3 py-3 text-sm transition ${
-                    isActive
-                      ? "bg-lime-gradient text-lime-foreground font-bold shadow-glow"
-                      : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
-                  }`
-                }
-              >
-                Реквизиты
-              </NavLink>
-              {legalDocuments.map((document) => (
+              <div className="lg:max-h-[calc(100vh-13rem)] lg:overflow-y-auto lg:pr-1">
                 <NavLink
-                  key={document.slug}
-                  to={`/legal/${document.slug}`}
+                  to="/legal"
+                  end
                   className={({ isActive }) =>
-                    `mt-1 block rounded-2xl px-3 py-3 text-sm transition ${
+                    `block rounded-2xl px-3 py-2.5 text-sm transition ${
                       isActive
                         ? "bg-lime-gradient text-lime-foreground font-bold shadow-glow"
                         : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                     }`
                   }
                 >
-                  {document.shortTitle}
+                  Реквизиты
                 </NavLink>
-              ))}
+                {legalDocuments.map((document) => (
+                  <NavLink
+                    key={document.slug}
+                    to={`/legal/${document.slug}`}
+                    className={({ isActive }) =>
+                      `mt-1 block rounded-2xl px-3 py-2.5 text-sm leading-tight transition ${
+                        isActive
+                          ? "bg-lime-gradient text-lime-foreground font-bold shadow-glow"
+                          : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
+                      }`
+                    }
+                  >
+                    {document.shortTitle}
+                  </NavLink>
+                ))}
+              </div>
             </div>
 
             <div className="mt-4 glass border border-white/10 rounded-[2rem] p-5 shadow-soft">
