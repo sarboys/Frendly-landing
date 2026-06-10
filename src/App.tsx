@@ -4,6 +4,7 @@ import LegalDocumentPage from "./pages/legal/LegalDocumentPage";
 import LegalIndex from "./pages/legal/LegalIndex";
 import CheckoutPage from "./pages/CheckoutPage";
 import OfferCodePage from "./pages/OfferCodePage";
+import PayPage from "./pages/PayPage";
 import Partners from "./pages/Partners";
 import PublicSharePage from "./pages/PublicSharePage";
 
@@ -13,6 +14,7 @@ const App = () => (
       <Route path="/" element={<Landing />} />
       <Route path="/landing" element={<Navigate to="/" replace />} />
       <Route path="/partners" element={<Partners />} />
+      <Route path="/pay" element={<PayPage />} />
       <Route path="/legal" element={<LegalIndex />} />
       <Route path="/legal/:slug" element={<LegalDocumentPage />} />
       <Route path="/checkout/:token" element={<CheckoutPage />} />
